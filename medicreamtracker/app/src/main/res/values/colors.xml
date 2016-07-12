@@ -1,6 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#FF4081</color>
+
+    <color name="white">#FFFFFF</color>
+    <color name="grey">#cccccc</color>
+    <color name="grey_700">#646464</color>
+    <color name="black">#000000</color>
+
+
+    <!-- rel: https://classroom.udacity.com/nanodegrees/nd801/parts/8011345406/modules/430205859175460/lessons/3940839262/concepts/43746786160923-->
+    <!-- https://material.google.com/style/color.html#color-color-palette-->
+    <color name="colorPrimary">#8BC34A</color> <!--500-->
+    <color name="colorPrimaryDark">#689F38</color> <!--700-->
+    <color name="colorPrimaryLight">#CCFF90</color> <!--100-->
+    <color name="colorAccent">#F48FB1</color>
 </resources>
