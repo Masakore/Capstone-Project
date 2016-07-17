@@ -3,8 +3,9 @@
       xmlns:tools="http://schemas.android.com/tools"
       tools:context="com.masakorelab.medicreamtracker.MainActivity">
     <item
-        android:id="@+id/action_settings"
+        android:id="@+id/register_activity"
         android:orderInCategory="100"
-        android:title="@string/action_settings"
+        android:title="@string/action_register"
         app:showAsAction="never"/>
+    <!-- ref: showAsAction - https://developer.android.com/guide/topics/resources/menu-resource.html-->
 </menu>
