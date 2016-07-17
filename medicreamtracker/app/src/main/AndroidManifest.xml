@@ -23,6 +23,11 @@
             android:label="@string/title_activity_register"
             android:theme="@style/AppTheme.NoActionBar">
         </activity>
+        <activity
+            android:name=".RecordActivity"
+            android:label="@string/title_activity_record"
+            android:theme="@style/AppTheme">
+        </activity>
     </application>
 
 </manifest>
