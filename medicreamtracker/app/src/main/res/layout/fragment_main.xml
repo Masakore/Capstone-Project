@@ -1,3 +1,4 @@
+<!--ref: relative layout - https://developer.android.com/guide/topics/ui/layout/relative.html-->
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 xmlns:tools="http://schemas.android.com/tools"
                 android:layout_width="match_parent"
@@ -8,10 +9,74 @@
                 android:paddingTop="@dimen/activity_vertical_margin"
                 tools:context="com.masakorelab.medicreamtracker.MainActivityFragment"
                 tools:showIn="@layout/activity_main">
-
-    <TextView
+    <Spinner
+        android:id="@+id/registered_item_spinner"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!"/>
+        android:layout_marginTop="@dimen/activity_spinner_margin"
+        android:layout_marginBottom="@dimen/activity_spinner_margin"
+        android:layout_centerHorizontal="true"
+        />
+
+    <ImageView
+        android:id="@+id/img_head"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/registered_item_spinner"
+        android:src="@drawable/head"
+        />
+
+    <ImageView
+        android:id="@+id/img_body"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/activity_vertical_margin"
+        android:layout_marginStart="@dimen/activity_horizontal_margin"
+        android:layout_marginEnd="@dimen/activity_horizontal_margin"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/img_head"
+        android:src="@drawable/body"/>
+
+    <ImageView
+        android:id="@+id/img_left_arm"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/activity_vertical_margin"
+        android:src="@drawable/left_arm"
+        android:layout_below="@id/img_head"
+        android:layout_toLeftOf="@id/img_body"
+        />
+
+    <ImageView
+        android:id="@+id/img_right_arm"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/activity_vertical_margin"
+        android:src="@drawable/right_arm"
+        android:layout_below="@id/img_head"
+        android:layout_toRightOf="@id/img_body"
+        />
+
+
+    <ImageView
+        android:id="@+id/img_left_leg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/activity_vertical_margin"
+        android:layout_below="@id/img_body"
+        android:layout_alignStart="@id/img_body"
+        android:src="@drawable/left_leg"/>
+
+    <ImageView
+        android:id="@+id/img_right_leg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/activity_vertical_margin"
+        android:layout_marginStart="@dimen/activity_horizontal_margin"
+        android:layout_below="@id/img_body"
+        android:layout_centerHorizontal="true"
+        android:layout_toRightOf="@id/img_left_leg"
+        android:src="@drawable/right_leg"/>
 
 </RelativeLayout>
