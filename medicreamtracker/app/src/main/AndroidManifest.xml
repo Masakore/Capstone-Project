@@ -28,6 +28,9 @@
             android:label="@string/title_activity_record"
             android:theme="@style/AppTheme">
         </activity>
+        <provider
+            android:authorities="com.masakorelab.medicreamtracker"
+            android:name=".data.MediProvider" />
     </application>
 
 </manifest>
