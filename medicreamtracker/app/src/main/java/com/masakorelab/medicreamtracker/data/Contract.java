@@ -4,6 +4,7 @@ import android.content.ContentResolver;
 import android.content.ContentUris;
 import android.net.Uri;
 import android.provider.BaseColumns;
+import android.text.format.Time;
 
 /**
  * Defines table and column names.
@@ -18,6 +19,15 @@ public class Contract {
   public static final String PATH_BODY_PART = "bodypart";
   public static final String PATH_RECORD = "record";
 
+  // To make it easy to query for the exact date, we normalize all dates that go into
+  // the database to the start of the the Julian day at UTC.
+  public static long normalizeDate(long applyDate) {
+    // normalize the date to the beginning of the (UTC) day
+    Time time = new Time();
+    time.set(applyDate);
+    int julianDay = Time.getJulianDay(applyDate, time.gmtoff);
+    return time.setJulianDay(julianDay);
+  }
 
   /* Inner class that defines the table contents of the cream name table */
   public static final class MediCreamEntry implements BaseColumns {
@@ -81,10 +91,9 @@ public class Contract {
       return CONTENT_URI.buildUpon().appendPath(mediCreamName).build();
     }
 
-    public static Uri buildRecordBodyPart(String bodyPartName) {
-      return CONTENT_URI.buildUpon().appendPath(bodyPartName).build();
+    public static String getMediCreamName(Uri uri) {
+      return uri.getPathSegments().get(1);
     }
-
   }
 
   public static final class BodyPartEntry implements BaseColumns {
