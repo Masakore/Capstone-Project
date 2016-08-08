@@ -13,52 +13,6 @@
     android:focusableInTouchMode="true"
     >
 
-    <!-- :nextFocusUp and :nextFocusLeft have been set to the id of this component
-    to prevent the parent view from receiving focus again -->
-    <!--ref: TextEdit unfocus: http://stackoverflow.com/questions/1555109/stop-edittext-from-gaining-focus-at-activity-startup-->
-    <android.support.design.widget.TextInputLayout
-        android:id="@+id/input_layout_name"
-        android:layout_marginTop="40dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        >
-
-        <EditText
-            android:id="@+id/register_cream_name"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/register_placeholder_name"
-            android:nextFocusUp="@id/register_cream_name"
-            android:nextFocusLeft="@id/register_cream_name"
-            />
-
-    </android.support.design.widget.TextInputLayout>
-
-    <android.support.design.widget.TextInputLayout
-        android:id="@+id/input_layout_description"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <EditText
-            android:id="@+id/register_desctiption"
-            android:inputType="textMultiLine"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/register_placeholder_description"
-            />
-
-    </android.support.design.widget.TextInputLayout>
-
-    <Button
-        android:id="@+id/btn_register"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/colorPrimary"
-        android:layout_marginTop="40dp"
-        android:textColor="@android:color/white"
-        android:text="@string/btn_register"
-        />
-
     <android.support.v7.widget.GridLayout
         android:id="@+id/register_table_header_grid"
         android:layout_width="match_parent"
