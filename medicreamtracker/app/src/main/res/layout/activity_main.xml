@@ -38,10 +38,10 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:layout_margin="@dimen/fab_margin"
-        android:src="@android:drawable/ic_dialog_email">
-
-        <include layout="@layout/fab_layout_main" />
+        android:src="@android:drawable/ic_menu_save">
 
     </android.support.design.widget.FloatingActionButton>
+
+    <include layout="@layout/fab_layout_main" />
 
 </android.support.design.widget.CoordinatorLayout>
