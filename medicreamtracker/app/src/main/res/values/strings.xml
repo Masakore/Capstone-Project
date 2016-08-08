@@ -2,8 +2,13 @@
     <string name="app_name">Medi Cream Tracker</string>
     <string name="action_settings">Settings</string>
     <string name="action_register">Register your cream type</string>
-    <string name="title_activity_register">RegisterActivity</string>
-    <string name="register_placeholder">Enter Medi Cream Here</string>
-    <string name="title_activity_record">RecordActivity</string>
+    <string name="title_activity_register">Register your cream type</string>
+    <string name="title_activity_record">Take record here</string>
+
+    //Register Activity
+    <string name="register_placeholder_name">Medi Cream Name</string>
+    <string name="register_placeholder_description">Description</string>
+    <string name="register_validation_empty">This is required field!</string>
+    <string name="btn_register">Add</string>
 
 </resources>

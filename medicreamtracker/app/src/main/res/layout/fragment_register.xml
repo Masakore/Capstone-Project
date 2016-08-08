@@ -3,24 +3,118 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:paddingStart="20dp"
+    android:paddingEnd="20dp"
     tools:context="com.masakorelab.medicreamtracker.RegisterActivityFragment"
     tools:showIn="@layout/activity_register"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
+    >
 
-    <EditText
+    <!-- :nextFocusUp and :nextFocusLeft have been set to the id of this component
+    to prevent the parent view from receiving focus again -->
+    <!--ref: TextEdit unfocus: http://stackoverflow.com/questions/1555109/stop-edittext-from-gaining-focus-at-activity-startup-->
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/input_layout_name"
+        android:layout_marginTop="40dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/activity_spinner_margin"
-        android:text="@string/register_placeholder"
-        />
-
-    <ListView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/activity_spinner_margin"
         >
 
-    </ListView>
+        <EditText
+            android:id="@+id/register_cream_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/register_placeholder_name"
+            android:nextFocusUp="@id/register_cream_name"
+            android:nextFocusLeft="@id/register_cream_name"
+            />
+
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/input_layout_description"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:id="@+id/register_desctiption"
+            android:inputType="textMultiLine"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/register_placeholder_description"
+            />
+
+    </android.support.design.widget.TextInputLayout>
+
+    <Button
+        android:id="@+id/btn_register"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        android:layout_marginTop="40dp"
+        android:textColor="@android:color/white"
+        android:text="@string/btn_register"
+        />
+
+    <android.support.v7.widget.GridLayout
+        android:id="@+id/register_table_header_grid"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimaryDark"
+        app:columnCount="6"
+        android:paddingBottom="@dimen/abc_list_item_padding_horizontal_material"
+        android:paddingTop="@dimen/abc_list_item_padding_horizontal_material"
+        >
+
+        <android.support.v7.widget.Space
+            app:layout_columnSpan="6"
+            app:layout_columnWeight="1"
+            app:layout_rowWeight="1" />
+
+        <TextView
+            android:text="ID"
+            android:layout_width="0dp"
+            android:fontFamily="sans-serif-light"
+            android:gravity="center_horizontal"
+            android:textSize="16sp"
+            app:layout_columnSpan="1"
+            app:layout_columnWeight="1"
+            app:layout_rowWeight="1"
+            app:layout_gravity="fill_horizontal"
+            />
+        <TextView
+            android:text="Name"
+            android:layout_width="0dp"
+            android:fontFamily="sans-serif-light"
+            android:gravity="center_horizontal"
+            android:textSize="16sp"
+            app:layout_columnSpan="2"
+            app:layout_columnWeight="2"
+            app:layout_rowWeight="1"
+            app:layout_gravity="fill_horizontal"
+            />
+        <TextView
+            android:text="Description"
+            android:layout_width="0dp"
+            android:fontFamily="sans-serif-light"
+            android:gravity="center_horizontal"
+            android:textSize="16sp"
+            app:layout_columnSpan="3"
+            app:layout_columnWeight="3"
+            app:layout_rowWeight="1"
+            app:layout_gravity="fill_horizontal"
+            />
+
+    </android.support.v7.widget.GridLayout>
+
+    <ListView
+        android:id="@+id/listView_register"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        />
 
 
 </LinearLayout>
