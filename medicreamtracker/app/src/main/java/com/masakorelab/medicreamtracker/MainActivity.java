@@ -9,8 +9,22 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.FrameLayout;
 
 public class MainActivity extends AppCompatActivity {
+  FloatingActionButton fab;
+  FloatingActionButton fab1;
+  FloatingActionButton fab2;
+
+  private boolean FAB_Status = false;
+
+  //Animations
+  Animation show_fab_1;
+  Animation hide_fab_1;
+  Animation show_fab_2;
+  Animation hide_fab_2;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -20,14 +34,44 @@ public class MainActivity extends AppCompatActivity {
     setSupportActionBar(toolbar);
     getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-    FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+    //https://github.com/sitepoint-editors/FloatingActionButton_Animation_Project/blob/master/FloatingActionButtonProject/app/src/main/java/com/valdio/valdioveliu/floatingactionbuttonproject/MainActivity.java
+    fab = (FloatingActionButton) findViewById(R.id.fab);
+    fab1 = (FloatingActionButton) findViewById(R.id.fab_1);
+    fab2 = (FloatingActionButton) findViewById(R.id.fab_2);
+
+    show_fab_1 = AnimationUtils.loadAnimation(getApplication(), R.anim.fab1_show);
+    hide_fab_1 = AnimationUtils.loadAnimation(getApplication(), R.anim.fab1_hide);
+    show_fab_2 = AnimationUtils.loadAnimation(getApplication(), R.anim.fab2_show);
+    hide_fab_2 = AnimationUtils.loadAnimation(getApplication(), R.anim.fab2_hide);
+
+
     fab.setOnClickListener(new View.OnClickListener() {
       @Override
-      public void onClick(View view) {
-        Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-            .setAction("Action", null).show();
+      public void onClick(View v) {
+        if (FAB_Status == false) {
+          expandFAB();
+          FAB_Status = true;
+        } else {
+          closeFAB();
+          FAB_Status = false;
+        }
       }
     });
+
+    fab1.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View v) {
+        startActivity(new Intent(MainActivity.this, RecordActivity.class));
+      }
+    });
+
+    fab2.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View v) {
+        startActivity(new Intent(MainActivity.this, RegisterActivity.class));
+      }
+    });
+
   }
 
   @Override
@@ -52,5 +96,41 @@ public class MainActivity extends AppCompatActivity {
     }
 
     return super.onOptionsItemSelected(item);
+  }
+
+  private void expandFAB() {
+    //Floating Action Button 1
+    FrameLayout.LayoutParams layoutParams = (FrameLayout.LayoutParams) fab1.getLayoutParams();
+    layoutParams.rightMargin += (int) (fab1.getWidth() * 1.7);
+    layoutParams.bottomMargin += (int) (fab1.getHeight() * 0.25);
+    fab1.setLayoutParams(layoutParams);
+    fab1.startAnimation(show_fab_1);
+    fab1.setClickable(true);
+
+    //Floating Action Button 2
+    FrameLayout.LayoutParams layoutParams2 = (FrameLayout.LayoutParams) fab2.getLayoutParams();
+    layoutParams2.rightMargin += (int) (fab2.getWidth() * 1.5);
+    layoutParams2.bottomMargin += (int) (fab2.getHeight() * 1.5);
+    fab2.setLayoutParams(layoutParams2);
+    fab2.startAnimation(show_fab_2);
+    fab2.setClickable(true);
+  }
+
+  private void closeFAB() {
+    //Floating Action Button 1
+    FrameLayout.LayoutParams layoutParams = (FrameLayout.LayoutParams) fab1.getLayoutParams();
+    layoutParams.rightMargin -= (int) (fab1.getWidth() * 1.7);
+    layoutParams.bottomMargin -= (int) (fab1.getHeight() * 0.25);
+    fab1.setLayoutParams(layoutParams);
+    fab1.startAnimation(hide_fab_1);
+    fab1.setClickable(false);
+
+    //Floating Action Button 2
+    FrameLayout.LayoutParams layoutParams2 = (FrameLayout.LayoutParams) fab2.getLayoutParams();
+    layoutParams2.rightMargin -= (int) (fab2.getWidth() * 1.5);
+    layoutParams2.bottomMargin -= (int) (fab2.getHeight() * 1.5);
+    fab2.setLayoutParams(layoutParams2);
+    fab2.startAnimation(hide_fab_2);
+    fab2.setClickable(false);
   }
 }
