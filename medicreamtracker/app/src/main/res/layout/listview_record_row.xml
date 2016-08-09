@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.GridLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/register_table_header_grid"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:minHeight="?android:attr/listPreferredItemHeight"
+    android:background="@color/white"
+    app:columnCount="6">
+
+    <TextView
+        android:id="@+id/date_record"
+        android:fontFamily="sans-serif-light"
+        android:gravity="center"
+        android:textSize="16sp"
+        app:layout_columnSpan="1"
+        app:layout_columnWeight="1"
+        app:layout_rowWeight="1"
+        app:layout_gravity="fill_horizontal"
+        />
+
+    <TextView
+        android:id="@+id/parts_record"
+        android:layout_width="0dp"
+        android:fontFamily="sans-serif-light"
+        android:gravity="center"
+        android:textSize="16sp"
+        app:layout_columnSpan="2"
+        app:layout_columnWeight="2"
+        app:layout_rowWeight="1"
+        app:layout_gravity="fill_horizontal"
+        />
+
+    <TextView
+        android:id="@+id/name_record"
+        android:layout_width="0dp"
+        android:fontFamily="sans-serif-light"
+        android:gravity="center"
+        android:textSize="16sp"
+        app:layout_columnSpan="3"
+        app:layout_columnWeight="3"
+        app:layout_rowWeight="1"
+        app:layout_gravity="fill_horizontal"
+        />
+
+</android.support.v7.widget.GridLayout>

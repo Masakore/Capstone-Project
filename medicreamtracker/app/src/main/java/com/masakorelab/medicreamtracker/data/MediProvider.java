@@ -16,20 +16,12 @@ public class MediProvider extends ContentProvider{
   private DBHelper mOpenHelper;
 
   static final int MEDI_CREAM = 100;
-  static final int MEDI_CREAM_ID = 101;
-  static final int MEDI_CREAM_NAME = 102;
-  static final int MEDI_CREAM_DESCRIPTION = 103;
 
   static final int BODY_PART = 200;
-  static final int BODY_PART_ID = 201;
-  static final int BODY_PART_CATEGORYNAME = 202;
-  static final int BODY_PART_PARTNAME = 203;
 
   static final int RECORD = 300;
-  static final int RECORD_ID = 301;
-  static final int RECORD_CREAME_NAME = 302;
-  static final int RECORD_APPLY_DATE = 302;
-  static final int RECORD_PART_OF_BODY = 302;
+  static final int RECORD_CREAME_NAME = 301;
+  static final int JOINED_RECORD = 302;
 
   private static final SQLiteQueryBuilder sRecordByMediCreamAndBodyPartQueryBuilder;
 
@@ -63,6 +55,18 @@ public class MediProvider extends ContentProvider{
       sortOrder);
   }
 
+  private Cursor getJoinedRecord() {
+
+    return  sRecordByMediCreamAndBodyPartQueryBuilder.query(mOpenHelper.getReadableDatabase(),
+        null, //projection = select in sql
+        null, //select = where in sql
+        null, //selectArgs = condition of where in sql
+        null, //groupBy
+        null, //having
+        null);
+
+  }
+
   //https://developer.android.com/reference/android/content/UriMatcher.html
   static UriMatcher buildUriMatcher() {
     // All paths added to the UriMatcher have a corresponding code to return when a match is
@@ -78,6 +82,7 @@ public class MediProvider extends ContentProvider{
 
     matcher.addURI(authority, Contract.PATH_RECORD, RECORD);
     matcher.addURI(authority, Contract.PATH_RECORD + "/*", RECORD_CREAME_NAME);
+    matcher.addURI(authority, Contract.PATH_JOINED_RECORD_TABLE, JOINED_RECORD);
 
     return matcher;
   }
@@ -139,7 +144,10 @@ public class MediProvider extends ContentProvider{
         );
         break;
       }
-
+      case JOINED_RECORD: {
+        retCursor = getJoinedRecord();
+        break;
+      }
       default:
         throw new UnsupportedOperationException("Unknown uri: " + uri);
     }
@@ -161,6 +169,8 @@ public class MediProvider extends ContentProvider{
       case RECORD:
         return Contract.RecordEntry.CONTENT_TYPE;
       case RECORD_CREAME_NAME:
+        return Contract.RecordEntry.CONTENT_TYPE;
+      case JOINED_RECORD:
         return Contract.RecordEntry.CONTENT_TYPE;
       default:
         throw new UnsupportedOperationException("Unknown uri" + uri);

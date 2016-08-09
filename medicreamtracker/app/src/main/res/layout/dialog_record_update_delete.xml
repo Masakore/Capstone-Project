@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/dialog_layout_root_update_delete"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:focusable="true"
+    android:focusableInTouchMode="true">
+
+    <!-- :nextFocusUp and :nextFocusLeft have been set to the id of this component
+    to prevent the parent view from receiving focus again -->
+    <!--ref: TextEdit unfocus: http://stackoverflow.com/questions/1555109/stop-edittext-from-gaining-focus-at-activity-startup-->
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/update_delete_layout_date"
+        android:layout_marginTop="40dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:id="@+id/record_date_update_delete"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/register_placeholder_name"
+            android:nextFocusUp="@id/dialog_layout_root_update_delete"
+            android:nextFocusLeft="@id/dialog_layout_root_update_delete"
+            />
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/update_delete_layout_parts"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:id="@+id/record_parts_update_delete"
+            android:inputType="textMultiLine"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/register_placeholder_description"
+            />
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/update_delete_layout_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:id="@+id/record_name_update_delete"
+            android:inputType="textMultiLine"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/register_placeholder_description"
+            />
+    </android.support.design.widget.TextInputLayout>
+
+    <Button
+        android:id="@+id/btn_record_update"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        android:layout_marginTop="40dp"
+        android:textColor="@android:color/white"
+        android:text="@string/btn_update"
+        />
+
+    <Button
+        android:id="@+id/btn_record_delete"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/holo_red_light"
+        android:textColor="@android:color/white"
+        android:text="@string/btn_delete"
+        />
+</LinearLayout>

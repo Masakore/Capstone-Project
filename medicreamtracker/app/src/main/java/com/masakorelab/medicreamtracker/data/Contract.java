@@ -18,6 +18,8 @@ public class Contract {
   public static final String PATH_MEDI_CREAM = "medicream";
   public static final String PATH_BODY_PART = "bodypart";
   public static final String PATH_RECORD = "record";
+  public static final String PATH_JOINED_RECORD_TABLE = "pathjoinedrecordtable";
+
 
   // To make it easy to query for the exact date, we normalize all dates that go into
   // the database to the start of the the Julian day at UTC.
@@ -69,6 +71,9 @@ public class Contract {
 
     public static final String CONTENT_ITEM_TYPE =
         ContentResolver.CURSOR_ITEM_BASE_TYPE + "/" + CONTENT_AUTHORITY + "/" + PATH_RECORD;
+
+    public static final Uri CONTENT_URI_JOINED_TABLE =
+        BASE_CONTENT_URI.buildUpon().appendPath(PATH_JOINED_RECORD_TABLE).build();
 
     // Table name
     public static final String TABLE_NAME = "record";

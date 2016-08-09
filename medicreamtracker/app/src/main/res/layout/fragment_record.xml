@@ -1,27 +1,65 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                xmlns:tools="http://schemas.android.com/tools"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                tools:context="com.masakorelab.medicreamtracker.RecordActivityFragment"
-                tools:showIn="@layout/activity_record"
-                android:orientation="vertical">
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              tools:context="com.masakorelab.medicreamtracker.RecordActivityFragment"
+              tools:showIn="@layout/activity_record"
+              android:orientation="vertical">
 
-    <EditText
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_marginTop="@dimen/activity_spinner_margin"
-    android:text="@string/register_placeholder"/>
-
-    <DatePicker
+    <android.support.v7.widget.GridLayout
+        android:id="@+id/register_table_header_grid"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimaryDark"
+        app:columnCount="6"
+        android:paddingBottom="@dimen/abc_list_item_padding_horizontal_material"
+        android:paddingTop="@dimen/abc_list_item_padding_horizontal_material"
+        >
+        <android.support.v7.widget.Space
+            app:layout_columnSpan="6"
+            app:layout_columnWeight="1"
+            app:layout_rowWeight="1" />
 
-    <!-- Multi-column-listview-->
-    <!-- http://techlovejump.com/android-multicolumn-listview/-->
-    <TableLayout
+        <TextView
+            android:text="Date"
+            android:layout_width="0dp"
+            android:fontFamily="sans-serif-light"
+            android:gravity="center_horizontal"
+            android:textSize="16sp"
+            app:layout_columnSpan="1"
+            app:layout_columnWeight="1"
+            app:layout_rowWeight="1"
+            app:layout_gravity="fill_horizontal"
+            />
+        <TextView
+            android:text="Where"
+            android:layout_width="0dp"
+            android:fontFamily="sans-serif-light"
+            android:gravity="center_horizontal"
+            android:textSize="16sp"
+            app:layout_columnSpan="2"
+            app:layout_columnWeight="2"
+            app:layout_rowWeight="1"
+            app:layout_gravity="fill_horizontal"
+            />
+        <TextView
+            android:text="Name"
+            android:layout_width="0dp"
+            android:fontFamily="sans-serif-light"
+            android:gravity="center_horizontal"
+            android:textSize="16sp"
+            app:layout_columnSpan="3"
+            app:layout_columnWeight="3"
+            app:layout_rowWeight="1"
+            app:layout_gravity="fill_horizontal"
+            />
+    </android.support.v7.widget.GridLayout>
+
+    <ListView
+        android:id="@+id/listView_record"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-    </TableLayout>
+        android:layout_height="wrap_content"
+        ></ListView>
 
 </LinearLayout>
