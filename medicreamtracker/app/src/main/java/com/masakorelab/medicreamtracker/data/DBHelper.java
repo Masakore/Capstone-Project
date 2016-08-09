@@ -7,7 +7,7 @@ import com.masakorelab.medicreamtracker.data.Contract.*;
 
 public class DBHelper extends SQLiteOpenHelper {
 
-  private static final  int DATABASE_VERSION = 2;
+  private static final  int DATABASE_VERSION = 4;
 
   static final String DATABASE_NAME = "medicream.db";
 
@@ -20,7 +20,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
     final String SQL_CREATE_MEDI_CREAME_TABLE = "CREATE TABLE " + MediCreamEntry.TABLE_NAME + "(" +
        MediCreamEntry._ID + " INTEGER PRIMARY KEY, " +
-       MediCreamEntry.COLUMN_NAME + " TEXT UNIQUE NOT NULL, " +
+       MediCreamEntry.COLUMN_NAME + " TEXT NOT NULL, " +
        MediCreamEntry.COLUMN_DESCRIPTION + " TEXT " +
        " );";
 
@@ -57,8 +57,9 @@ public class DBHelper extends SQLiteOpenHelper {
   /* Intentionally blank because existing data must be kept even when you change your db schema as much as possible */
   @Override
   public void onUpgrade(SQLiteDatabase sqLiteDatabase, int oldVersion, int newVersion) {
-    // Note that this only fires if you change the version number for your database.
-    // It does NOT depend on the version number for your application.
-
+    sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + MediCreamEntry.TABLE_NAME);
+    sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + BodyPartEntry.TABLE_NAME);
+    sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + RecordEntry.TABLE_NAME);
+    onCreate(sqLiteDatabase);
   }
 }
