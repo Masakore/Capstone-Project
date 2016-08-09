@@ -12,7 +12,6 @@ import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -30,15 +29,19 @@ public class RegisterActivity extends AppCompatActivity {
     Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
     setSupportActionBar(toolbar);
 
+    //Alert Dialog for inserting data
     final LayoutInflater inflater = (LayoutInflater)this.getSystemService(LAYOUT_INFLATER_SERVICE);
-    final View dialogLayout = inflater.inflate(R.layout.fragment_register_dialog, (ViewGroup) findViewById(R.id.dialog_layout_root));
-
+    final View dialogLayout = inflater.inflate(R.layout.dialog_register_create, (ViewGroup) findViewById(R.id.dialog_layout_root));
     final AlertDialog.Builder builder = new AlertDialog.Builder(this);
     builder.setTitle("Enter Medi Cream Name");
     builder.setView(dialogLayout);
     builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
       @Override
       public void onClick(DialogInterface dialog, int which) {
+        inputName.getText().clear();
+        inputDescription.getText().clear();
+        inputLayoutName.setErrorEnabled(false);
+        inputLayoutName.setError(null);
         dialog.dismiss();
       }
     });
@@ -69,26 +72,27 @@ public class RegisterActivity extends AppCompatActivity {
   }
 
   private void submitForm() {
-    if(!validateName()) {
+    if (!validateName()) {
       return;
     }
 
+    insertRegisteredData(inputName.getText().toString().trim(), inputDescription.getText().toString().trim());
     Toast.makeText(this, "Added", Toast.LENGTH_SHORT).show();
+
+    inputName.getText().clear();
+    inputDescription.getText().clear();
+    inputLayoutName.setErrorEnabled(false);
+    inputLayoutName.setError(null);
+    mDialog.dismiss();
   }
 
   private boolean validateName() {
     if (inputName.getText().toString().trim().isEmpty()) {
+      inputLayoutName.setErrorEnabled(true);
       inputLayoutName.setError(getString(R.string.register_validation_empty));
-      requestFocus(inputName);
       return false;
     }
     return true;
-  }
-
-  private void requestFocus(View view) {
-    if (view.requestFocus()) {
-      getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
-    }
   }
 
   private class MyTextWatcher implements TextWatcher {
@@ -100,7 +104,6 @@ public class RegisterActivity extends AppCompatActivity {
 
     @Override
     public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
     }
 
     @Override
@@ -115,8 +118,13 @@ public class RegisterActivity extends AppCompatActivity {
           validateName();
           break;
       }
+
     }
   }
 
+  private void insertRegisteredData(String name, String description) {
+    AsyncDataParser adp = new AsyncDataParser(this, Consts.CLASS_REGISTER, Consts.CRUD_CREATE);
+    adp.execute(name, description);
+  }
 
 }

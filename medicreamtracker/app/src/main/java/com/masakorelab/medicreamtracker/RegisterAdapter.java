@@ -6,14 +6,18 @@ import android.support.v4.widget.CursorAdapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import com.masakorelab.medicreamtracker.data.Contract;
 
 public class RegisterAdapter extends CursorAdapter {
 
+  final Context mContext;
   public RegisterAdapter(Context context, Cursor c, int flags) {
     super(context, c, flags);
+    mContext = context;
   }
 
   @Override
@@ -32,7 +36,7 @@ public class RegisterAdapter extends CursorAdapter {
     TextView name = (TextView)view.findViewById(R.id.name_register);
     TextView description = (TextView)view.findViewById(R.id.des_register);
 
-    id.setText(cursor.getInt(idx_id));
+    id.setText(cursor.getString(idx_id));
     name.setText(cursor.getString(idx_name));
     description.setText(cursor.getString(idx_des));
   }

@@ -10,5 +10,7 @@
     <string name="register_placeholder_description">Description</string>
     <string name="register_validation_empty">This is required field!</string>
     <string name="btn_register">Add</string>
+    <string name="btn_update">Update</string>
+    <string name="btn_delete">Delete</string>
 
 </resources>
