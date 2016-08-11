@@ -22,11 +22,25 @@ import com.masakorelab.medicreamtracker.data.Contract;
 public class RecordActivityFragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor> {
   private static final int RECORD_LOADER = 1;
   private RecordAdapter mRecordAdapter;
-  private Dialog mDialog;
 
-  private String UPDATE_ID;
   public RecordActivityFragment() {
   }
+
+  public static final String[] JOINE_RECORD_COLUMNS = {
+      Contract.RecordEntry.TABLE_NAME + "." + Contract.RecordEntry._ID,
+      Contract.RecordEntry.COLUMN_APPLY_DATE,
+      Contract.RecordEntry.COLUMN_CREAM_NAME,
+      Contract.RecordEntry.COLUMN_PART_OF_BODY,
+      Contract.BodyPartEntry.COLUMN_CATEGORYNAME,
+      Contract.MediCreamEntry.COLUMN_NAME
+  };
+
+  static final int COL_RECOR_ID = 0;
+  static final int COL_RECOR_APPLY_DATE = 1;
+  static final int COL_RECOR_CREAM_NAME = 2;
+  static final int COL_RECOR_PART_OF_BODY = 3;
+  static final int COL_BODY_CATEGORYNAME = 4;
+  static final int COL_MEDI_NAME = 5;
 
   @Override
   public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -40,6 +54,7 @@ public class RecordActivityFragment extends Fragment implements LoaderManager.Lo
 
     return root;
   }
+
   @Override
   public void onActivityCreated(Bundle savedInstanceState) {
     getLoaderManager().initLoader(RECORD_LOADER, null, this);
@@ -48,8 +63,10 @@ public class RecordActivityFragment extends Fragment implements LoaderManager.Lo
 
   @Override
   public Loader<Cursor> onCreateLoader(int id, Bundle args) {
+    String sortOrder = Contract.RecordEntry.COLUMN_APPLY_DATE + " ASC";
+
     Uri recordUri = Contract.RecordEntry.CONTENT_URI_JOINED_TABLE;
-    return new CursorLoader(getActivity(), recordUri, null, null, null, null);
+    return new CursorLoader(getActivity(), recordUri, JOINE_RECORD_COLUMNS, null, null, sortOrder);
   }
 
   @Override

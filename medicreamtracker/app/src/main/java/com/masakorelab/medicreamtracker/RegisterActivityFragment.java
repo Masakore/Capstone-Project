@@ -25,7 +25,7 @@ import android.widget.Toast;
 import com.masakorelab.medicreamtracker.data.Contract;
 
 public class RegisterActivityFragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor> {
-  private static final int FORECAST_LOADER = 0;
+  private static final int REGISTER_LOADER = 0;
   private RegisterAdapter mRegisterAdapter;
   private Dialog mDialog;
 
@@ -117,7 +117,7 @@ public class RegisterActivityFragment extends Fragment implements LoaderManager.
 
   @Override
   public void onActivityCreated(Bundle savedInstanceState) {
-    getLoaderManager().initLoader(FORECAST_LOADER, null, this);
+    getLoaderManager().initLoader(REGISTER_LOADER, null, this);
     super.onActivityCreated(savedInstanceState);
   }
 

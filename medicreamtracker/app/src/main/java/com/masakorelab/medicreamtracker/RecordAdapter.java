@@ -26,16 +26,15 @@ public class RecordAdapter extends CursorAdapter {
 
   @Override
   public void bindView(View view, Context context, Cursor cursor) {
-    int idx_date = cursor.getColumnIndex(Contract.RecordEntry.COLUMN_APPLY_DATE);
-    int idx_name = cursor.getColumnIndex(Contract.RecordEntry.COLUMN_CREAM_NAME);
-    int idx_des = cursor.getColumnIndex(Contract.RecordEntry.COLUMN_PART_OF_BODY);
-
     TextView date = (TextView)view.findViewById(R.id.date_record);
     TextView parts = (TextView)view.findViewById(R.id.parts_record);
     TextView name = (TextView)view.findViewById(R.id.name_record);
 
-    date.setText(cursor.getString(idx_date));
-    parts.setText(cursor.getString(idx_des));
-    name.setText(cursor.getString(idx_name));
+    String tmp = cursor.getString(RecordActivityFragment.COL_RECOR_APPLY_DATE);
+    tmp = Utils.timeConverter(Long.parseLong(tmp));
+
+    date.setText(tmp);
+    parts.setText(cursor.getString(RecordActivityFragment.COL_BODY_CATEGORYNAME));
+    name.setText(cursor.getString(RecordActivityFragment.COL_MEDI_NAME));
   }
 }

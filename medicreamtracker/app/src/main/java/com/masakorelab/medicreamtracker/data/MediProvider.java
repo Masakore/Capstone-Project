@@ -23,18 +23,37 @@ public class MediProvider extends ContentProvider{
   static final int RECORD_CREAME_NAME = 301;
   static final int JOINED_RECORD = 302;
 
+  private static final SQLiteQueryBuilder sRecordByMediCreamQueryBuilder;
   private static final SQLiteQueryBuilder sRecordByMediCreamAndBodyPartQueryBuilder;
 
   static {
-    sRecordByMediCreamAndBodyPartQueryBuilder = new SQLiteQueryBuilder();
+    sRecordByMediCreamQueryBuilder = new SQLiteQueryBuilder();
 
-    sRecordByMediCreamAndBodyPartQueryBuilder.setTables(
+    sRecordByMediCreamQueryBuilder.setTables(
         Contract.RecordEntry.TABLE_NAME + " INNER JOIN " +
             Contract.MediCreamEntry.TABLE_NAME +
             " ON " + Contract.RecordEntry.TABLE_NAME +
             "." + Contract.RecordEntry.COLUMN_CREAM_NAME +
             " = " + Contract.MediCreamEntry.TABLE_NAME +
             "." + Contract.MediCreamEntry._ID);
+
+    sRecordByMediCreamAndBodyPartQueryBuilder = new SQLiteQueryBuilder();
+
+    sRecordByMediCreamAndBodyPartQueryBuilder.setTables(
+        Contract.RecordEntry.TABLE_NAME +
+            " INNER JOIN " +
+            Contract.MediCreamEntry.TABLE_NAME +
+            " ON " + Contract.RecordEntry.TABLE_NAME +
+            "." + Contract.RecordEntry.COLUMN_CREAM_NAME +
+            " = " + Contract.MediCreamEntry.TABLE_NAME +
+            "." + Contract.MediCreamEntry._ID +
+            " INNER JOIN " +
+            Contract.BodyPartEntry.TABLE_NAME +
+            " ON " + Contract.RecordEntry.TABLE_NAME +
+            "." + Contract.RecordEntry.COLUMN_PART_OF_BODY +
+            " = " + Contract.BodyPartEntry.TABLE_NAME +
+            "." + Contract.BodyPartEntry._ID
+    );
   }
 
   private static final String sMediCreamName = Contract.MediCreamEntry.TABLE_NAME + "." + Contract.MediCreamEntry.COLUMN_NAME + " = ? ";
@@ -46,7 +65,7 @@ public class MediProvider extends ContentProvider{
     String selection = sMediCreamName;
 
     //https://developer.android.com/reference/android/database/sqlite/SQLiteQueryBuilder.html#query(android.database.sqlite.SQLiteDatabase, java.lang.String[], java.lang.String, java.lang.String[], java.lang.String, java.lang.String, java.lang.String, java.lang.String)
-    return  sRecordByMediCreamAndBodyPartQueryBuilder.query(mOpenHelper.getReadableDatabase(),
+    return  sRecordByMediCreamQueryBuilder.query(mOpenHelper.getReadableDatabase(),
       projection, //projection = select in sql
       selection, //select = where in sql
       selectionArgs, //selectArgs = condition of where in sql
@@ -55,15 +74,15 @@ public class MediProvider extends ContentProvider{
       sortOrder);
   }
 
-  private Cursor getJoinedRecord() {
+  private Cursor getJoinedRecord(String[] projection, String selection, String[] selectionArgs, String sortOrder) {
 
     return  sRecordByMediCreamAndBodyPartQueryBuilder.query(mOpenHelper.getReadableDatabase(),
-        null, //projection = select in sql
-        null, //select = where in sql
-        null, //selectArgs = condition of where in sql
+        projection, //projection = select in sql
+        selection, //select = where in sql
+        selectionArgs, //selectArgs = condition of where in sql
         null, //groupBy
         null, //having
-        null);
+        sortOrder);
 
   }
 
@@ -145,7 +164,7 @@ public class MediProvider extends ContentProvider{
         break;
       }
       case JOINED_RECORD: {
-        retCursor = getJoinedRecord();
+        retCursor = getJoinedRecord(projection, selection, selectionArgs, sortOrder);
         break;
       }
       default:

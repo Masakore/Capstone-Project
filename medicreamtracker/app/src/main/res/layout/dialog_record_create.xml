@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/dialog_layout_root"
     android:orientation="vertical"
     android:layout_width="match_parent"
@@ -31,33 +32,20 @@
 
     </android.support.design.widget.TextInputLayout>
 
-
-    <android.support.design.widget.TextInputLayout
-        android:id="@+id/input_layout_parts"
+    <fr.ganfra.materialspinner.MaterialSpinner
+        android:id="@+id/record_parts"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        app:ms_hint="@string/record_placeholder_parts"
+        />
 
-        <Spinner
-            android:id="@+id/record_parts"
-            android:inputType="textMultiLine"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/record_placeholder_parts"
-            />
-    </android.support.design.widget.TextInputLayout>
 
-    <android.support.design.widget.TextInputLayout
-        android:id="@+id/input_layout_name"
+    <fr.ganfra.materialspinner.MaterialSpinner
+        android:id="@+id/record_name"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <EditText
-            android:id="@+id/record_name"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/record_placeholder_name"
-            />
-    </android.support.design.widget.TextInputLayout>
+        android:layout_height="wrap_content"
+        app:ms_hint="@string/record_placeholder_name"
+        />
 
     <Button
         android:id="@+id/btn_create"

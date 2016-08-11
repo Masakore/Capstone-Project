@@ -3,25 +3,20 @@ package com.masakorelab.medicreamtracker;
 import android.app.DatePickerDialog;
 import android.content.DialogInterface;
 import android.database.Cursor;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TextInputLayout;
-import android.support.v4.app.LoaderManager;
-import android.support.v4.content.CursorLoader;
-import android.support.v4.content.Loader;
+import android.support.v4.widget.SimpleCursorAdapter;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.masakorelab.medicreamtracker.data.Contract;
@@ -29,18 +24,24 @@ import com.masakorelab.medicreamtracker.data.Contract;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
-public class RecordActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor> {
+import fr.ganfra.materialspinner.MaterialSpinner;
 
-  private static final int SPINNER_LOADER = 2;
-  private RecordSpinnerAdapter mRecordSpinnerAdapter;
+public class RecordActivity extends AppCompatActivity {
 
-  private TextInputLayout inputLayoutName, inputLayoutParts, inputLayoutDate;
-  private EditText inputName, inputDate;
-  private Spinner inputParts;
+  SimpleCursorAdapter mBodyPartSpinnerCursorAdapter;
+  SimpleCursorAdapter mMediCreamSpinnerCursorAdapter;
+
+  private TextInputLayout inputLayoutDate;
+  private EditText inputDate;
+  private MaterialSpinner inputName, inputParts;
   private Button btnCreate;
 
   private AlertDialog mDialog;
   private DatePickerDialog mDatePicker;
+
+  private String mName;
+  private String mParts;
+  private String mCalendarTime;
 
   private SimpleDateFormat dateFormat;
 
@@ -51,9 +52,6 @@ public class RecordActivity extends AppCompatActivity implements LoaderManager.L
     Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
     setSupportActionBar(toolbar);
 
-    mRecordSpinnerAdapter = new RecordSpinnerAdapter(this, null, 0);
-    getSupportLoaderManager().initLoader(SPINNER_LOADER, null, this);
-
     //Alert Dialog for inserting data
     final LayoutInflater inflater = (LayoutInflater)this.getSystemService(LAYOUT_INFLATER_SERVICE);
     final View dialogLayout = inflater.inflate(R.layout.dialog_record_create, (ViewGroup) findViewById(R.id.dialog_layout_root));
@@ -63,14 +61,11 @@ public class RecordActivity extends AppCompatActivity implements LoaderManager.L
     builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
       @Override
       public void onClick(DialogInterface dialog, int which) {
+        inputParts.setSelection(0);
+        inputName.setSelection(0);
         inputDate.getText().clear();
-        inputName.getText().clear();
         inputLayoutDate.setErrorEnabled(false);
         inputLayoutDate.setError(null);
-        inputLayoutParts.setErrorEnabled(false);
-        inputLayoutParts.setError(null);
-        inputLayoutName.setErrorEnabled(false);
-        inputLayoutName.setError(null);
         dialog.dismiss();
       }
     });
@@ -78,15 +73,11 @@ public class RecordActivity extends AppCompatActivity implements LoaderManager.L
     dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
     //ref: text validation: http://www.androidhive.info/2015/09/android-material-design-floating-labels-for-edittext/
-    inputLayoutName = (TextInputLayout) dialogLayout.findViewById(R.id.input_layout_name);
-    inputLayoutParts = (TextInputLayout) dialogLayout.findViewById(R.id.input_layout_parts);
     inputLayoutDate = (TextInputLayout) dialogLayout.findViewById(R.id.input_layout_date);
-    inputName = (EditText) dialogLayout.findViewById(R.id.record_name);
-    inputParts = (Spinner) dialogLayout.findViewById(R.id.record_parts);
+    inputName = (MaterialSpinner) dialogLayout.findViewById(R.id.record_name);
+    inputParts = (MaterialSpinner) dialogLayout.findViewById(R.id.record_parts);
     inputDate = (EditText) dialogLayout.findViewById(R.id.record_date);
     btnCreate = (Button) dialogLayout.findViewById(R.id.btn_create);
-    inputName.addTextChangedListener(new MyTextWatcher(inputName));
-    inputParts.setAdapter(mRecordSpinnerAdapter);
 
     btnCreate.setOnClickListener(new View.OnClickListener() {
       @Override
@@ -104,6 +95,29 @@ public class RecordActivity extends AppCompatActivity implements LoaderManager.L
     });
 
     setDateTimeField();
+    setSpinner();
+  }
+
+  //ref:https://developer.android.com/reference/android/widget/SimpleCursorAdapter.html#SimpleCursorAdapter(android.content.Context, int, android.database.Cursor, java.lang.String[], int[])
+  private void setSpinner() {
+
+    String[] columns;
+    int[] to;
+
+    Cursor bodyPartCursor = getContentResolver().query(Contract.BodyPartEntry.CONTENT_URI, null, null, null, null);
+    columns = new String[] { Contract.BodyPartEntry.COLUMN_CATEGORYNAME };
+    to = new int[] { android.R.id.text1 };
+    mBodyPartSpinnerCursorAdapter = new SimpleCursorAdapter(this, android.R.layout.simple_spinner_dropdown_item, bodyPartCursor, columns, to);
+    mBodyPartSpinnerCursorAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+    inputParts.setAdapter(mBodyPartSpinnerCursorAdapter);
+
+    Cursor mediCreamCursor = getContentResolver().query(Contract.MediCreamEntry.CONTENT_URI, null, null, null, null);
+    columns = new String[] { Contract.MediCreamEntry.COLUMN_NAME };
+    to = new int[] { android.R.id.text1 };
+    mMediCreamSpinnerCursorAdapter = new SimpleCursorAdapter(this, android.R.layout.simple_spinner_dropdown_item, mediCreamCursor, columns, to);
+    mMediCreamSpinnerCursorAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+    inputName.setAdapter(mMediCreamSpinnerCursorAdapter);
+
   }
 
   private void submitForm() {
@@ -111,87 +125,42 @@ public class RecordActivity extends AppCompatActivity implements LoaderManager.L
       return;
     }
 
-    insertRecords(inputDate.getText().toString().trim(), inputParts.toString().trim(), inputName.getText().toString().trim());
-    Toast.makeText(this, "Added", Toast.LENGTH_SHORT).show();
 
+    Cursor c = (Cursor) inputName.getSelectedItem();
+    int ind_name = c.getColumnIndex(Contract.MediCreamEntry.COLUMN_NAME);
+    mName = c.getString(ind_name);
+
+    c = (Cursor) inputParts.getSelectedItem();
+    int ind_parts = c.getColumnIndex(Contract.BodyPartEntry.COLUMN_CATEGORYNAME);
+    mParts = c.getString(ind_parts);
+
+    insertRecords(mParts, mName);
+    Toast.makeText(this, "Created!!", Toast.LENGTH_SHORT).show();
+
+    inputParts.setSelection(0);
+    inputName.setSelection(0);
     inputDate.getText().clear();
-    inputName.getText().clear();
     inputLayoutDate.setErrorEnabled(false);
     inputLayoutDate.setError(null);
-    inputLayoutParts.setErrorEnabled(false);
-    inputLayoutParts.setError(null);
-    inputLayoutName.setErrorEnabled(false);
-    inputLayoutName.setError(null);
     mDialog.dismiss();
   }
 
   private boolean validate() {
     if (inputDate.getText().toString().trim().isEmpty()) {
-      inputLayoutParts.setErrorEnabled(true);
-      inputLayoutParts.setError(getString(R.string.register_validation_empty));
-      return false;
-    }
-    if (inputParts.getSelectedItem().toString().trim().isEmpty()) {
-      inputLayoutParts.setErrorEnabled(true);
-      inputLayoutParts.setError(getString(R.string.register_validation_empty));
-      return false;
-    }
-    if (inputName.getText().toString().trim().isEmpty()) {
-      inputLayoutName.setErrorEnabled(true);
-      inputLayoutName.setError(getString(R.string.register_validation_empty));
-      return false;
-    }
-    return true;
-  }
-
-
-  @Override
-  public Loader<Cursor> onCreateLoader(int id, Bundle args) {
-    Uri bodyPartUri = Contract.BodyPartEntry.CONTENT_URI;
-    return new CursorLoader(this, bodyPartUri, null, null, null, null);
-  }
-
-  @Override
-  public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
-    mRecordSpinnerAdapter.swapCursor(data);
-  }
-
-  @Override
-  public void onLoaderReset(Loader<Cursor> loader) {
-    mRecordSpinnerAdapter.swapCursor(null);
-  }
-
-  private class MyTextWatcher implements TextWatcher {
-    private View view;
-
-    private MyTextWatcher(View view) {
-      this.view = view;
+      inputLayoutDate.setErrorEnabled(true);
+      inputLayoutDate.setError(getString(R.string.validation_empty));
     }
 
-    @Override
-    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+    if (inputParts.getSelectedItem() == null || inputParts.getSelectedItem().equals(getString(R.string.record_placeholder_parts))) {
+      inputParts.setError(getString(R.string.validation_empty));
     }
 
-    @Override
-    public void onTextChanged(CharSequence s, int start, int before, int count) {
-
+    if (inputName.getSelectedItem() == null || inputName.getSelectedItem().equals(getString(R.string.record_placeholder_name))) {
+      inputName.setError(getString(R.string.validation_empty));
     }
 
-    @Override
-    public void afterTextChanged(Editable s) {
-      switch (view.getId()) {
-        case R.id.record_name:
-          validate();
-          break;
-        case R.id.record_parts:
-          validate();
-          break;
-        case R.id.record_date:
-          validate();
-          break;
-      }
+    return !(inputLayoutDate.isErrorEnabled() || inputParts.getError() != null || inputName.getError() != null);
 
-    }
   }
 
   //ref:http://androidopentutorials.com/android-datepickerdialog-on-edittext-click-event/
@@ -203,6 +172,7 @@ public class RecordActivity extends AppCompatActivity implements LoaderManager.L
         Calendar newDate = Calendar.getInstance();
         newDate.set(year, monthOfYear, dayOfMonth);
         inputDate.setText(dateFormat.format(newDate.getTime()));
+        mCalendarTime = Long.toString(newDate.getTimeInMillis());
       }
 
     },newCalendar.get(Calendar.YEAR), newCalendar.get(Calendar.MONTH), newCalendar.get(Calendar.DAY_OF_MONTH));
@@ -215,8 +185,8 @@ public class RecordActivity extends AppCompatActivity implements LoaderManager.L
     });
   }
 
-  private void insertRecords(String date, String parts, String name) {
-    AsyncDataParser adp = new AsyncDataParser(this, Consts.CLASS_REGISTER, Consts.CRUD_CREATE);
-    adp.execute(date, parts, name);
+  private void insertRecords(String parts, String name) {
+    AsyncDataParser adp = new AsyncDataParser(this, Consts.CLASS_RECORD, Consts.CRUD_CREATE);
+    adp.execute(mCalendarTime, parts, name);
   }
 }
