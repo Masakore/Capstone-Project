@@ -30,10 +30,10 @@ public class RecordAdapter extends CursorAdapter {
     TextView parts = (TextView)view.findViewById(R.id.parts_record);
     TextView name = (TextView)view.findViewById(R.id.name_record);
 
-    String tmp = cursor.getString(RecordActivityFragment.COL_RECOR_APPLY_DATE);
-    tmp = Utils.timeConverter(Long.parseLong(tmp));
+    String dateInMillis = cursor.getString(RecordActivityFragment.COL_RECOR_APPLY_DATE);
+    String formattedDate = Utils.timeConverter(Long.parseLong(dateInMillis));
 
-    date.setText(tmp);
+    date.setText(formattedDate);
     parts.setText(cursor.getString(RecordActivityFragment.COL_BODY_CATEGORYNAME));
     name.setText(cursor.getString(RecordActivityFragment.COL_MEDI_NAME));
   }
