@@ -63,7 +63,7 @@ public class RecordActivityFragment extends Fragment implements LoaderManager.Lo
 
   @Override
   public Loader<Cursor> onCreateLoader(int id, Bundle args) {
-    String sortOrder = Contract.RecordEntry.COLUMN_APPLY_DATE + " ASC";
+    String sortOrder = Contract.RecordEntry.COLUMN_APPLY_DATE + " DESC";
 
     Uri recordUri = Contract.RecordEntry.CONTENT_URI_JOINED_TABLE;
     return new CursorLoader(getActivity(), recordUri, JOINE_RECORD_COLUMNS, null, null, sortOrder);
