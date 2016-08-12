@@ -24,5 +24,10 @@
 
     //Main Activity
     <string name="main_placeholder_name">Select Cream Here to see your records!</string>
+    <string name="main_threedays">3 days ~ 1 week</string>
+    <string name="main_oneweek">1 week ~ 3 week</string>
+    <string name="main_threeweeks"> 3 weeeks~</string>
+    <string name="widget_title">List of Recent Activity</string>
+
 
 </resources>

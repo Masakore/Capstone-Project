@@ -6,6 +6,10 @@
     <color name="grey_700">#646464</color>
     <color name="black">#000000</color>
 
+    <!--body color-->
+    <color name="threedays">#E65100</color>
+    <color name="oneweek">#FF9800</color>
+    <color name="threeweeks">#FFE0B2</color>
 
     <!-- rel: https://classroom.udacity.com/nanodegrees/nd801/parts/8011345406/modules/430205859175460/lessons/3940839262/concepts/43746786160923-->
     <!-- https://material.google.com/style/color.html#color-color-palette-->
