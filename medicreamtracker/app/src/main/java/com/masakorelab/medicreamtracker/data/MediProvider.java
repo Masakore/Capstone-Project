@@ -22,6 +22,7 @@ public class MediProvider extends ContentProvider{
   static final int RECORD = 300;
   static final int RECORD_CREAME_NAME = 301;
   static final int JOINED_RECORD = 302;
+  static final int RECORD_CREAME_NAME_BODY_PARTS = 303;
 
   private static final SQLiteQueryBuilder sRecordByMediCreamQueryBuilder;
   private static final SQLiteQueryBuilder sRecordByMediCreamAndBodyPartQueryBuilder;
@@ -102,6 +103,7 @@ public class MediProvider extends ContentProvider{
     matcher.addURI(authority, Contract.PATH_RECORD, RECORD);
     matcher.addURI(authority, Contract.PATH_RECORD + "/*", RECORD_CREAME_NAME);
     matcher.addURI(authority, Contract.PATH_JOINED_RECORD_TABLE, JOINED_RECORD);
+    matcher.addURI(authority, Contract.PATH_RECORD + "/*/*", RECORD_CREAME_NAME_BODY_PARTS);
 
     return matcher;
   }
@@ -165,6 +167,18 @@ public class MediProvider extends ContentProvider{
       }
       case JOINED_RECORD: {
         retCursor = getJoinedRecord(projection, selection, selectionArgs, sortOrder);
+        break;
+      }
+      case RECORD_CREAME_NAME_BODY_PARTS: {
+        retCursor = mOpenHelper.getReadableDatabase().query(
+            Contract.RecordEntry.TABLE_NAME,
+            projection,
+            selection,
+            selectionArgs,
+            null,
+            null,
+            sortOrder
+        );
         break;
       }
       default:
