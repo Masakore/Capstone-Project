@@ -100,10 +100,13 @@ public class MainActivity extends AppCompatActivity {
     //ref: https://developer.android.com/training/basics/firstapp/starting-activity.html
     if (id == R.id.register_activity) {
       mTracker.send(new HitBuilders.EventBuilder()
-          .setCategory("Action")
-          .setAction("Register")
+          .setCategory(getString(R.string.category_1))
+          .setAction(getString(R.string.action_type_1))
           .build());
       startActivity(new Intent(this, RegisterActivity.class));
+      return true;
+    } else if (id == R.id.record_activity) {
+      startActivity(new Intent(this, RecordActivity.class));
       return true;
     }
 

@@ -34,4 +34,9 @@
 
     //Ads
     <string name="banner_ad_unit_id">ca-app-pub-3940256099942544/6300978111</string>
+
+    //Analytics
+    <string name="category_1">Action</string>
+    <string name="action_type_1">Register</string>
+
 </resources>
