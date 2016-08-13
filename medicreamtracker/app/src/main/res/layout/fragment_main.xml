@@ -2,10 +2,21 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 xmlns:tools="http://schemas.android.com/tools"
                 xmlns:app="http://schemas.android.com/apk/res-auto"
+                xmlns:ads="http://schemas.android.com/apk/res-auto"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 tools:context="com.masakorelab.medicreamtracker.MainActivityFragment"
                 tools:showIn="@layout/activity_main">
+
+    <com.google.android.gms.ads.AdView
+        android:id="@+id/adView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        ads:adSize="BANNER"
+        ads:adUnitId="@string/banner_ad_unit_id">
+    </com.google.android.gms.ads.AdView>
+
     <TextView
         android:id="@+id/item_explanation_label"
         android:fontFamily="sans-serif-light"
@@ -15,6 +26,7 @@
         android:layout_marginTop="@dimen/activity_vertical_margin"
         android:textSize="18sp"
         android:text="@string/main_placeholder_name"
+        android:layout_below="@id/adView"
         />
 
     <Spinner
