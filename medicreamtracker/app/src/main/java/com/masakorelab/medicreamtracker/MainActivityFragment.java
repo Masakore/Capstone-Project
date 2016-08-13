@@ -158,5 +158,6 @@ public class MainActivityFragment extends Fragment {
       GradientDrawable drawable = (GradientDrawable) img_view_bodypart.getBackground().getCurrent();
       drawable.setColor(Color.WHITE);
     }
+    cursor.close();
   }
 }
