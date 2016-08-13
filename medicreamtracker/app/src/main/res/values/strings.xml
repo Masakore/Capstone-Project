@@ -27,7 +27,10 @@
     <string name="main_threedays">3 days ~ 1 week</string>
     <string name="main_oneweek">1 week ~ 3 week</string>
     <string name="main_threeweeks"> 3 weeeks~</string>
-    <string name="widget_title">List of Recent Activity</string>
+
+    //Widget
+    <string name="widget_title">Medi Cream List</string>
+    <string name="empty_record_list">No Record Found</string>
 
 
 </resources>

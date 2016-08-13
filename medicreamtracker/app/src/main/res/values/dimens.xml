@@ -7,4 +7,13 @@
 
     <dimen name="register_horizontal_margin">16dp</dimen>
     <dimen name="register_vertical_margin">16dp</dimen>
+
+    <!--widget-->
+    <dimen name="widget_default_height">180dp</dimen>
+    <dimen name="widget_default_width">250dp</dimen>
+    <dimen name="widget_min_resize_height">@dimen/widget_default_height</dimen>
+    <dimen name="widget_min_resize_width">@dimen/widget_default_width</dimen>
+    <dimen name="widget_text_size">20dp</dimen>
+
+
 </resources>
