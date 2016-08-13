@@ -1,0 +1,38 @@
+{
+  "project_info": {
+    "project_number": "240130117679",
+    "project_id": "firebase-medi-tracker"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:240130117679:android:70f3337a572dcb69",
+        "android_client_info": {
+          "package_name": "com.masakorelab.medicreamtracker"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA4kjQ1-fKUHx8ppyzL-NeHlovs0-l7Lq4"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 2,
+          "analytics_property": {
+            "tracking_id": "UA-82451749-1"
+          }
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 1
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

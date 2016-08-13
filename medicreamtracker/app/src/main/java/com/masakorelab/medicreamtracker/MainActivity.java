@@ -12,12 +12,11 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.FrameLayout;
 
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.AdView;
-import com.google.android.gms.ads.MobileAds;
+import com.google.android.gms.analytics.HitBuilders;
+import com.google.android.gms.analytics.Tracker;
 
 public class MainActivity extends AppCompatActivity {
-
+  Tracker mTracker;
 
   FloatingActionButton fab;
   FloatingActionButton fab1;
@@ -35,6 +34,10 @@ public class MainActivity extends AppCompatActivity {
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
+
+    AnalyticsApplication application = (AnalyticsApplication) getApplication();
+    mTracker = application.getDefaultTracker();
+
     Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
     setSupportActionBar(toolbar);
     getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -77,7 +80,6 @@ public class MainActivity extends AppCompatActivity {
       }
     });
 
-
   }
 
   @Override
@@ -97,6 +99,10 @@ public class MainActivity extends AppCompatActivity {
     //How to call another activity from menu
     //ref: https://developer.android.com/training/basics/firstapp/starting-activity.html
     if (id == R.id.register_activity) {
+      mTracker.send(new HitBuilders.EventBuilder()
+          .setCategory("Action")
+          .setAction("Register")
+          .build());
       startActivity(new Intent(this, RegisterActivity.class));
       return true;
     }
