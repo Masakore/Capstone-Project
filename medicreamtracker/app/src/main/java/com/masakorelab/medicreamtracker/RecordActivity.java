@@ -11,6 +11,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -50,6 +51,8 @@ public class RecordActivity extends AppCompatActivity {
     setContentView(R.layout.activity_record);
     Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
     setSupportActionBar(toolbar);
+    getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+    getSupportActionBar().setDisplayShowHomeEnabled(true);
 
     //Alert Dialog for inserting data
     final LayoutInflater inflater = (LayoutInflater)this.getSystemService(LAYOUT_INFLATER_SERVICE);
@@ -187,5 +190,13 @@ public class RecordActivity extends AppCompatActivity {
   private void insertRecords(String parts, String name) {
     AsyncDataParser adp = new AsyncDataParser(this, Consts.CLASS_RECORD, Consts.CRUD_CREATE);
     adp.execute(mCalendarTime, parts, name);
+  }
+
+  @Override
+  public boolean onOptionsItemSelected(MenuItem item) {
+    if (item.getItemId() == android.R.id.home) {
+      finish();
+    }
+    return super.onOptionsItemSelected(item);
   }
 }

@@ -35,12 +35,14 @@ public class MainActivity extends AppCompatActivity {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
 
+    //Analytics initialization to keep using single instance
     AnalyticsApplication application = (AnalyticsApplication) getApplication();
     mTracker = application.getDefaultTracker();
 
     Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
     setSupportActionBar(toolbar);
-    getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+    getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+    getSupportActionBar().setDisplayShowTitleEnabled(false);
 
     //https://github.com/sitepoint-editors/FloatingActionButton_Animation_Project/blob/master/FloatingActionButtonProject/app/src/main/java/com/valdio/valdioveliu/floatingactionbuttonproject/MainActivity.java
     fab = (FloatingActionButton) findViewById(R.id.fab);
@@ -79,7 +81,6 @@ public class MainActivity extends AppCompatActivity {
         startActivity(new Intent(MainActivity.this, RegisterActivity.class));
       }
     });
-
   }
 
   @Override

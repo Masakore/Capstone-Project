@@ -10,6 +10,7 @@ import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -28,6 +29,7 @@ public class RegisterActivity extends AppCompatActivity {
     setContentView(R.layout.activity_register);
     Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
     setSupportActionBar(toolbar);
+    getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
     //Alert Dialog for inserting data
     final LayoutInflater inflater = (LayoutInflater)this.getSystemService(LAYOUT_INFLATER_SERVICE);
@@ -125,6 +127,14 @@ public class RegisterActivity extends AppCompatActivity {
   private void insertRegisteredData(String name, String description) {
     AsyncDataParser adp = new AsyncDataParser(this, Consts.CLASS_REGISTER, Consts.CRUD_CREATE);
     adp.execute(name, description);
+  }
+
+  @Override
+  public boolean onOptionsItemSelected(MenuItem item) {
+    if (item.getItemId() == android.R.id.home) {
+      finish();
+    }
+    return super.onOptionsItemSelected(item);
   }
 
 }

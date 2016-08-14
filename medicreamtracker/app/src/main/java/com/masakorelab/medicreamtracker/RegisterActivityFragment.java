@@ -22,9 +22,15 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
 import com.masakorelab.medicreamtracker.data.Contract;
 
 public class RegisterActivityFragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor> {
+
+  //Google services
+  private AdView mAdView;
+
   private static final int REGISTER_LOADER = 0;
   private RegisterAdapter mRegisterAdapter;
   private Dialog mDialog;
@@ -111,6 +117,11 @@ public class RegisterActivityFragment extends Fragment implements LoaderManager.
         mDialog.show();
       }
     });
+
+    //Ads
+    mAdView = (AdView) root.findViewById(R.id.adView);
+    AdRequest adRequest = new AdRequest.Builder().addTestDevice(AdRequest.DEVICE_ID_EMULATOR).build();
+    mAdView.loadAd(adRequest);
 
     return root;
   }

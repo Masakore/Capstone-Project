@@ -14,16 +14,11 @@ import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.Spinner;
 
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.AdView;
 import com.masakorelab.medicreamtracker.data.Contract;
 
 import java.util.Calendar;
 
 public class MainActivityFragment extends Fragment {
-
-  //Google services
-  private AdView mAdView;
 
   SimpleCursorAdapter mSpinnerAdapter;
 
@@ -73,14 +68,6 @@ public class MainActivityFragment extends Fragment {
     img_right_leg = (ImageView) root.findViewById(R.id.img_right_leg);
     mNameSpinner = (Spinner) root.findViewById(R.id.item_spinner);
     setSpinner();
-
-    //Ads
-    //MobileAds.initialize(getApplicationContext(), getResources().getString(R.string.banner_ad_unit_id));
-    mAdView = (AdView) root.findViewById(R.id.adView);
-    //To whom test my code, please set your device id here
-    AdRequest adRequest = new AdRequest.Builder().addTestDevice(AdRequest.DEVICE_ID_EMULATOR).build();
-    //AdRequest adRequest = new AdRequest.Builder().build();
-    mAdView.loadAd(adRequest);
 
     return root;
   }
