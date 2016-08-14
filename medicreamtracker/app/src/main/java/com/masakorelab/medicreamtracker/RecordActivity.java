@@ -30,7 +30,7 @@ import fr.ganfra.materialspinner.MaterialSpinner;
 public class RecordActivity extends AppCompatActivity {
   private static final String STATE_PARTS_SPINNER = "statepartsspinner";
   private static final String STATE_NAME_SPINNER = "statenamespinner";
-  private static final String STATE_DATE = "statepartsspinner";
+  private static final String STATE_DATE = "statedatepicker";
   private static final String STATE_DIALOG = "statedialog";
   private boolean IS_DIALOG_OPEN = false;
 
