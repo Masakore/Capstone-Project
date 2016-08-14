@@ -33,6 +33,6 @@
         android:contentDescription="@string/description_record_fab"
         android:focusable="true"
         android:focusableInTouchMode="true"
-        android:src="@android:drawable/ic_dialog_email"/>
+        android:src="@drawable/ic_create_white_24dp"/>
 
 </android.support.design.widget.CoordinatorLayout>

@@ -33,6 +33,6 @@
         android:contentDescription="@string/description_register_fab"
         android:focusable="true"
         android:focusableInTouchMode="true"
-        android:src="@android:drawable/ic_menu_add"/>
+        android:src="@drawable/ic_add_circle_outline_white_24dp"/>
 
 </android.support.design.widget.CoordinatorLayout>
