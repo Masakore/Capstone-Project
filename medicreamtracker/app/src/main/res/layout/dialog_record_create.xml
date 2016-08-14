@@ -28,7 +28,6 @@
 
             <EditText
                 android:id="@+id/record_date"
-                android:inputType="date"
                 android:layout_marginTop="40dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

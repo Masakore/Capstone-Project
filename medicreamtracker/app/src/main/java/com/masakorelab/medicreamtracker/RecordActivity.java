@@ -10,6 +10,7 @@ import android.support.v4.widget.SimpleCursorAdapter;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.InputType;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -85,8 +86,9 @@ public class RecordActivity extends AppCompatActivity {
     inputName = (MaterialSpinner) dialogLayout.findViewById(R.id.record_name);
     inputParts = (MaterialSpinner) dialogLayout.findViewById(R.id.record_parts);
     inputDate = (EditText) dialogLayout.findViewById(R.id.record_date);
-    btnCreate = (Button) dialogLayout.findViewById(R.id.btn_create);
+    inputDate.setInputType(InputType.TYPE_NULL);
 
+    btnCreate = (Button) dialogLayout.findViewById(R.id.btn_create);
     btnCreate.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View v) {
@@ -110,7 +112,6 @@ public class RecordActivity extends AppCompatActivity {
 
   //ref:https://developer.android.com/reference/android/widget/SimpleCursorAdapter.html#SimpleCursorAdapter(android.content.Context, int, android.database.Cursor, java.lang.String[], int[])
   private void setSpinner() {
-
     String[] columns;
     int[] to;
 
@@ -127,14 +128,12 @@ public class RecordActivity extends AppCompatActivity {
     mMediCreamSpinnerCursorAdapter = new SimpleCursorAdapter(this, android.R.layout.simple_spinner_dropdown_item, mediCreamCursor, columns, to);
     mMediCreamSpinnerCursorAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
     inputName.setAdapter(mMediCreamSpinnerCursorAdapter);
-
   }
 
   private void submitForm() {
     if (!validate()) {
       return;
     }
-
 
     Cursor c = (Cursor) inputName.getSelectedItem();
     int ind_name = c.getColumnIndex(Contract.MediCreamEntry.COLUMN_NAME);
@@ -171,7 +170,6 @@ public class RecordActivity extends AppCompatActivity {
     }
 
     return !(inputLayoutDate.isErrorEnabled() || inputParts.getError() != null || inputName.getError() != null);
-
   }
 
   //ref:http://androidopentutorials.com/android-datepickerdialog-on-edittext-click-event/
