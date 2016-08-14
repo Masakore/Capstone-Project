@@ -27,6 +27,11 @@ import java.util.Calendar;
 import fr.ganfra.materialspinner.MaterialSpinner;
 
 public class RecordActivity extends AppCompatActivity {
+  private static final String STATE_PARTS_SPINNER = "statepartsspinner";
+  private static final String STATE_NAME_SPINNER = "statenamespinner";
+  private static final String STATE_DATE = "statepartsspinner";
+  private static final String STATE_DIALOG = "statedialog";
+  private boolean IS_DIALOG_OPEN = false;
 
   SimpleCursorAdapter mBodyPartSpinnerCursorAdapter;
   SimpleCursorAdapter mMediCreamSpinnerCursorAdapter;
@@ -68,6 +73,7 @@ public class RecordActivity extends AppCompatActivity {
         inputDate.getText().clear();
         inputLayoutDate.setErrorEnabled(false);
         inputLayoutDate.setError(null);
+        IS_DIALOG_OPEN = false;
         dialog.dismiss();
       }
     });
@@ -90,8 +96,10 @@ public class RecordActivity extends AppCompatActivity {
 
     FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
     fab.setOnClickListener(new View.OnClickListener() {
+
       @Override
       public void onClick(View view) {
+        IS_DIALOG_OPEN = true;
         mDialog.show();
       }
     });
@@ -144,6 +152,7 @@ public class RecordActivity extends AppCompatActivity {
     inputDate.getText().clear();
     inputLayoutDate.setErrorEnabled(false);
     inputLayoutDate.setError(null);
+    IS_DIALOG_OPEN = false;
     mDialog.dismiss();
   }
 
@@ -198,5 +207,28 @@ public class RecordActivity extends AppCompatActivity {
       finish();
     }
     return super.onOptionsItemSelected(item);
+  }
+
+  @Override
+  protected void onSaveInstanceState(Bundle outState) {
+    super.onSaveInstanceState(outState);
+
+    outState.putBoolean(STATE_DIALOG, IS_DIALOG_OPEN);
+    outState.putString(STATE_DATE, inputDate.getText().toString());
+    outState.putInt(STATE_NAME_SPINNER, inputName.getSelectedItemPosition());
+    outState.putInt(STATE_PARTS_SPINNER, inputParts.getSelectedItemPosition());
+  }
+
+  @Override
+  protected void onRestoreInstanceState(Bundle savedInstanceState) {
+    super.onRestoreInstanceState(savedInstanceState);
+
+    if (savedInstanceState != null && savedInstanceState.getBoolean(STATE_DIALOG) == true) {
+      inputDate.setText(savedInstanceState.getString(STATE_DATE));
+      inputParts.setSelection(savedInstanceState.getInt(STATE_PARTS_SPINNER));
+      inputName.setSelection(savedInstanceState.getInt(STATE_NAME_SPINNER));
+      IS_DIALOG_OPEN = true;
+      mDialog.show();
+    }
   }
 }

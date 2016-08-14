@@ -19,6 +19,7 @@ import com.masakorelab.medicreamtracker.data.Contract;
 import java.util.Calendar;
 
 public class MainActivityFragment extends Fragment {
+  static final String STATE_SPINNER = "selecteditem";
 
   SimpleCursorAdapter mSpinnerAdapter;
 
@@ -164,5 +165,20 @@ public class MainActivityFragment extends Fragment {
       drawable.setColor(Color.WHITE);
     }
     cursor.close();
+  }
+
+  @Override
+  public void onSaveInstanceState(Bundle outState) {
+    outState.putInt(STATE_SPINNER, mNameSpinner.getSelectedItemPosition());
+    super.onSaveInstanceState(outState);
+  }
+
+  @Override
+  public void onViewStateRestored(Bundle savedInstanceState) {
+    super.onViewStateRestored(savedInstanceState);
+
+    if (savedInstanceState != null) {
+      mNameSpinner.setSelection(savedInstanceState.getInt(STATE_SPINNER));
+    }
   }
 }

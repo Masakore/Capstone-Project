@@ -27,6 +27,10 @@ import com.google.android.gms.ads.AdView;
 import com.masakorelab.medicreamtracker.data.Contract;
 
 public class RegisterActivityFragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor> {
+  private static final String STATE_NAME = "statename";
+  private static final String STATE_DESCRIPTION = "statedescription";
+  private static final String STATE_DIALOG = "statedialog";
+  private static boolean IS_DIALOG_OPEN = false;
 
   //Google services
   private AdView mAdView;
@@ -95,6 +99,7 @@ public class RegisterActivityFragment extends Fragment implements LoaderManager.
         inputDescription.getText().clear();
         inputLayoutName.setErrorEnabled(false);
         inputLayoutName.setError(null);
+        IS_DIALOG_OPEN = false;
         mDialog.dismiss();
       }
     });
@@ -114,6 +119,7 @@ public class RegisterActivityFragment extends Fragment implements LoaderManager.
         UPDATE_ID = cursor.getString(COL_ID);
         inputName.setText(cursor.getString(COL_NAME));
         inputDescription.setText(cursor.getString(COL_DESCTIPTION));
+        IS_DIALOG_OPEN = true;
         mDialog.show();
       }
     });
@@ -160,6 +166,7 @@ public class RegisterActivityFragment extends Fragment implements LoaderManager.
     inputDescription.getText().clear();
     inputLayoutName.setErrorEnabled(false);
     inputLayoutName.setError(null);
+    IS_DIALOG_OPEN = false;
     mDialog.dismiss();
   }
 
@@ -209,4 +216,22 @@ public class RegisterActivityFragment extends Fragment implements LoaderManager.
     adp.execute(updateId);
   }
 
+  @Override
+  public void onSaveInstanceState(Bundle outState) {
+    super.onSaveInstanceState(outState);
+    outState.putBoolean(STATE_DIALOG, IS_DIALOG_OPEN);
+    outState.putString(STATE_NAME, inputName.getText().toString());
+    outState.putString(STATE_DESCRIPTION, inputDescription.getText().toString());
+  }
+
+  @Override
+  public void onViewStateRestored(Bundle savedInstanceState) {
+    super.onViewStateRestored(savedInstanceState);
+    if (savedInstanceState != null && savedInstanceState.getBoolean(STATE_DIALOG) == true) {
+      inputName.setText(savedInstanceState.getString(STATE_NAME));
+      inputDescription.setText(savedInstanceState.getString(STATE_DESCRIPTION));
+      IS_DIALOG_OPEN = true;
+      mDialog.show();
+    }
+  }
 }

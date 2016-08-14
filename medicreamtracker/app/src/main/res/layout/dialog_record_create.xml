@@ -1,72 +1,78 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/dialog_layout_root"
-    android:orientation="vertical"
-    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:nextFocusDown="@+id/record_date"
-    android:nextFocusForward="@+id/record_date"
-    android:focusable="true"
-    android:focusableInTouchMode="true">
-
-    <!-- :nextFocusUp and :nextFocusLeft have been set to the id of this component
-    to prevent the parent view from receiving focus again -->
-    <!--ref: TextEdit unfocus: http://stackoverflow.com/questions/1555109/stop-edittext-from-gaining-focus-at-activity-startup-->
-
-    <android.support.design.widget.TextInputLayout
-        android:id="@+id/input_layout_date"
-        android:layout_marginTop="40dp"
-        android:contentDescription="@string/description_record_dialog_date"
+    android:layout_width="match_parent"
+    >
+    <LinearLayout
+        android:id="@+id/dialog_layout_root"
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent"
+        android:nextFocusDown="@+id/record_date"
+        android:nextFocusForward="@+id/record_date"
+        android:focusable="true"
+        android:focusableInTouchMode="true">
 
-        <EditText
-            android:id="@+id/record_date"
-            android:inputType="date"
+        <!-- :nextFocusUp and :nextFocusLeft have been set to the id of this component
+        to prevent the parent view from receiving focus again -->
+        <!--ref: TextEdit unfocus: http://stackoverflow.com/questions/1555109/stop-edittext-from-gaining-focus-at-activity-startup-->
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/input_layout_date"
             android:layout_marginTop="40dp"
+            android:contentDescription="@string/description_record_dialog_date"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:id="@+id/record_date"
+                android:inputType="date"
+                android:layout_marginTop="40dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/record_placeholder_date"
+                android:nextFocusDown="@+id/record_parts"
+                android:nextFocusForward="@+id/record_parts"
+                />
+
+        </android.support.design.widget.TextInputLayout>
+
+        <fr.ganfra.materialspinner.MaterialSpinner
+            android:id="@+id/record_parts"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/record_placeholder_date"
-            android:nextFocusDown="@+id/record_parts"
-            android:nextFocusForward="@+id/record_parts"
+            android:contentDescription="@string/description_record_dialog_bodypart"
+            android:nextFocusForward="@+id/record_name"
+            android:nextFocusUp="@+id/record_date"
+            android:nextFocusDown="@+id/record_name"
+            app:ms_hint="@string/record_placeholder_parts"
             />
 
-    </android.support.design.widget.TextInputLayout>
 
-    <fr.ganfra.materialspinner.MaterialSpinner
-        android:id="@+id/record_parts"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:contentDescription="@string/description_record_dialog_bodypart"
-        android:nextFocusForward="@+id/record_name"
-        android:nextFocusUp="@+id/record_date"
-        android:nextFocusDown="@+id/record_name"
-        app:ms_hint="@string/record_placeholder_parts"
-        />
+        <fr.ganfra.materialspinner.MaterialSpinner
+            android:id="@+id/record_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/description_record_dialog_name"
+            android:nextFocusForward="@+id/btn_create"
+            android:nextFocusUp="@+id/record_parts"
+            android:nextFocusDown="@+id/btn_create"
+            app:ms_hint="@string/record_placeholder_name"
+            />
 
+        <Button
+            android:id="@+id/btn_create"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimary"
+            android:layout_marginTop="40dp"
+            android:textColor="@android:color/white"
+            android:text="@string/record_btn_create"
+            android:nextFocusUp="@+id/record_name"
+            />
 
-    <fr.ganfra.materialspinner.MaterialSpinner
-        android:id="@+id/record_name"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:contentDescription="@string/description_record_dialog_name"
-        android:nextFocusForward="@+id/btn_create"
-        android:nextFocusUp="@+id/record_parts"
-        android:nextFocusDown="@+id/btn_create"
-        app:ms_hint="@string/record_placeholder_name"
-        />
+    </LinearLayout>
 
-    <Button
-        android:id="@+id/btn_create"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/colorPrimary"
-        android:layout_marginTop="40dp"
-        android:textColor="@android:color/white"
-        android:text="@string/record_btn_create"
-        android:nextFocusUp="@+id/record_name"
-        />
-
-</LinearLayout>
+</ScrollView>

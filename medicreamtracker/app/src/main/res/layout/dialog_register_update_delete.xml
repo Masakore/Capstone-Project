@@ -1,76 +1,82 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-              xmlns:android="http://schemas.android.com/apk/res/android"
-              android:id="@+id/dialog_layout_root_update_delete"
-              android:orientation="vertical"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:nextFocusDown="@+id/register_cream_name_update_delete"
-              android:nextFocusForward="@+id/register_cream_name_update_delete"
-              android:focusable="true"
-              android:focusableInTouchMode="true">
 
-    <!-- :nextFocusUp and :nextFocusLeft have been set to the id of this component
-    to prevent the parent view from receiving focus again -->
-    <!--ref: TextEdit unfocus: http://stackoverflow.com/questions/1555109/stop-edittext-from-gaining-focus-at-activity-startup-->
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    >
+    <LinearLayout
+                  android:id="@+id/dialog_layout_root_update_delete"
+                  android:orientation="vertical"
+                  android:layout_width="match_parent"
+                  android:layout_height="match_parent"
+                  android:nextFocusDown="@+id/register_cream_name_update_delete"
+                  android:nextFocusForward="@+id/register_cream_name_update_delete"
+                  android:focusable="true"
+                  android:focusableInTouchMode="true">
 
-    <android.support.design.widget.TextInputLayout
-        android:id="@+id/update_delete_layout_name"
-        android:layout_marginTop="40dp"
-        android:contentDescription="@string/description_register_dialog_edit_name"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        <!-- :nextFocusUp and :nextFocusLeft have been set to the id of this component
+        to prevent the parent view from receiving focus again -->
+        <!--ref: TextEdit unfocus: http://stackoverflow.com/questions/1555109/stop-edittext-from-gaining-focus-at-activity-startup-->
 
-        <EditText
-            android:id="@+id/register_cream_name_update_delete"
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/update_delete_layout_name"
+            android:layout_marginTop="40dp"
+            android:contentDescription="@string/description_register_dialog_edit_name"
             android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:id="@+id/register_cream_name_update_delete"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/register_placeholder_name"
+                android:nextFocusDown="@+id/register_desctiption_update_delete"
+                android:nextFocusForward="@+id/register_desctiption_update_delete"
+                />
+
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/update_delete_layout_description"
+            android:contentDescription="@string/description_register_dialog_edit_desctiption"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:id="@+id/register_desctiption_update_delete"
+                android:inputType="textMultiLine"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/register_placeholder_description"
+                android:nextFocusUp="@+id/register_cream_name_update_delete"
+                android:nextFocusDown="@+id/btn_register_update"
+                android:nextFocusForward="@+id/btn_register_update"
+                />
+
+        </android.support.design.widget.TextInputLayout>
+
+        <Button
+            android:id="@+id/btn_register_update"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/register_placeholder_name"
-            android:nextFocusDown="@+id/register_desctiption_update_delete"
-            android:nextFocusForward="@+id/register_desctiption_update_delete"
+            android:background="@color/colorPrimary"
+            android:layout_marginTop="40dp"
+            android:textColor="@android:color/white"
+            android:text="@string/btn_update"
+            android:nextFocusUp="@+id/register_desctiption_update_delete"
+            android:nextFocusDown="@+id/btn_register_delete"
+            android:nextFocusForward="@+id/btn_register_delete"
             />
 
-    </android.support.design.widget.TextInputLayout>
-
-    <android.support.design.widget.TextInputLayout
-        android:id="@+id/update_delete_layout_description"
-        android:contentDescription="@string/description_register_dialog_edit_desctiption"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <EditText
-            android:id="@+id/register_desctiption_update_delete"
-            android:inputType="textMultiLine"
-            android:layout_width="match_parent"
+        <Button
+            android:id="@+id/btn_register_delete"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/register_placeholder_description"
-            android:nextFocusUp="@+id/register_cream_name_update_delete"
-            android:nextFocusDown="@+id/btn_register_update"
-            android:nextFocusForward="@+id/btn_register_update"
+            android:background="@android:color/holo_red_light"
+            android:textColor="@android:color/white"
+            android:text="@string/btn_delete"
+            android:nextFocusUp="@+id/btn_register_update"
             />
-
-    </android.support.design.widget.TextInputLayout>
-
-    <Button
-        android:id="@+id/btn_register_update"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/colorPrimary"
-        android:layout_marginTop="40dp"
-        android:textColor="@android:color/white"
-        android:text="@string/btn_update"
-        android:nextFocusUp="@+id/register_desctiption_update_delete"
-        android:nextFocusDown="@+id/btn_register_delete"
-        android:nextFocusForward="@+id/btn_register_delete"
-        />
-
-    <Button
-        android:id="@+id/btn_register_delete"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:background="@android:color/holo_red_light"
-        android:textColor="@android:color/white"
-        android:text="@string/btn_delete"
-        android:nextFocusUp="@+id/btn_register_update"
-        />
-</LinearLayout>
+    </LinearLayout>
+</ScrollView>

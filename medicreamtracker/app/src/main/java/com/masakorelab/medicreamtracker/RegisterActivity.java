@@ -18,10 +18,15 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 public class RegisterActivity extends AppCompatActivity {
+  private static final String STATE_NAME = "statename";
+  private static final String STATE_DESCRIPTION = "statedescription";
+  private static final String STATE_DIALOG = "statedialog";
+  private static boolean IS_DIALOG_OPEN = false;
+
   TextInputLayout inputLayoutName, inputLayoutDescription;
-  EditText inputName, inputDescription;
-  Button btnRegister;
-  AlertDialog mDialog;
+  private EditText inputName, inputDescription;
+  private Button btnRegister;
+  private AlertDialog mDialog;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +49,7 @@ public class RegisterActivity extends AppCompatActivity {
         inputDescription.getText().clear();
         inputLayoutName.setErrorEnabled(false);
         inputLayoutName.setError(null);
+        IS_DIALOG_OPEN = false;
         dialog.dismiss();
       }
     });
@@ -68,6 +74,7 @@ public class RegisterActivity extends AppCompatActivity {
     fab.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {
+        IS_DIALOG_OPEN = true;
         mDialog.show();
       }
     });
@@ -85,6 +92,7 @@ public class RegisterActivity extends AppCompatActivity {
     inputDescription.getText().clear();
     inputLayoutName.setErrorEnabled(false);
     inputLayoutName.setError(null);
+    IS_DIALOG_OPEN = false;
     mDialog.dismiss();
   }
 
@@ -137,4 +145,23 @@ public class RegisterActivity extends AppCompatActivity {
     return super.onOptionsItemSelected(item);
   }
 
+  @Override
+  protected void onSaveInstanceState(Bundle outState) {
+    super.onSaveInstanceState(outState);
+    outState.putBoolean(STATE_DIALOG, IS_DIALOG_OPEN);
+    outState.putString(STATE_NAME, inputName.getText().toString());
+    outState.putString(STATE_DESCRIPTION, inputDescription.getText().toString());
+  }
+
+  @Override
+  protected void onRestoreInstanceState(Bundle savedInstanceState) {
+    super.onRestoreInstanceState(savedInstanceState);
+
+    if (savedInstanceState != null && savedInstanceState.getBoolean(STATE_DIALOG) == true) {
+      inputName.setText(savedInstanceState.getString(STATE_NAME));
+      inputDescription.setText(savedInstanceState.getString(STATE_DESCRIPTION));
+      IS_DIALOG_OPEN = true;
+      mDialog.show();
+    }
+  }
 }
