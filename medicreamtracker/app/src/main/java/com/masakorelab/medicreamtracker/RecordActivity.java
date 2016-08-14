@@ -55,9 +55,9 @@ public class RecordActivity extends AppCompatActivity {
     final LayoutInflater inflater = (LayoutInflater)this.getSystemService(LAYOUT_INFLATER_SERVICE);
     final View dialogLayout = inflater.inflate(R.layout.dialog_record_create, (ViewGroup) findViewById(R.id.dialog_layout_root));
     final AlertDialog.Builder builder = new AlertDialog.Builder(this);
-    builder.setTitle("Create Your Records");
+    builder.setTitle(getString(R.string.record_dialog_title_create));
     builder.setView(dialogLayout);
-    builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+    builder.setNegativeButton(getString(R.string.cancel), new DialogInterface.OnClickListener() {
       @Override
       public void onClick(DialogInterface dialog, int which) {
         inputParts.setSelection(0);
@@ -69,7 +69,7 @@ public class RecordActivity extends AppCompatActivity {
       }
     });
     mDialog = builder.create();
-    dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+    dateFormat = new SimpleDateFormat(getString(R.string.date_format));
 
     //ref: text validation: http://www.androidhive.info/2015/09/android-material-design-floating-labels-for-edittext/
     inputLayoutDate = (TextInputLayout) dialogLayout.findViewById(R.id.input_layout_date);
@@ -134,7 +134,7 @@ public class RecordActivity extends AppCompatActivity {
     mParts = c.getString(ind_parts);
 
     insertRecords(mParts, mName);
-    Toast.makeText(this, "Created!!", Toast.LENGTH_SHORT).show();
+    Toast.makeText(this, getString(R.string.toast_created), Toast.LENGTH_SHORT).show();
 
     inputParts.setSelection(0);
     inputName.setSelection(0);

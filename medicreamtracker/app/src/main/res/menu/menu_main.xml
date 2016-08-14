@@ -10,7 +10,7 @@
     <item
         android:id="@+id/record_activity"
         android:orderInCategory="90"
-        android:title="@string/action_register"
+        android:title="@string/action_record"
         app:showAsAction="never"/>
     <!-- ref: showAsAction - https://developer.android.com/guide/topics/resources/menu-resource.html-->
 </menu>

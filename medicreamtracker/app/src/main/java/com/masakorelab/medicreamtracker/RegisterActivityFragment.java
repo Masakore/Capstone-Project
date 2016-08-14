@@ -4,9 +4,9 @@ import android.app.Dialog;
 import android.content.DialogInterface;
 import android.database.Cursor;
 import android.net.Uri;
+import android.os.Bundle;
 import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.Fragment;
-import android.os.Bundle;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
@@ -48,9 +48,9 @@ public class RegisterActivityFragment extends Fragment implements LoaderManager.
 
     final View dialogLayout = inflater.inflate(R.layout.dialog_register_update_delete, (ViewGroup) getActivity().findViewById(R.id.dialog_layout_root_update_delete));
     final AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-    builder.setTitle("Update Medi Cream Name");
+    builder.setTitle(getString(R.string.register_dialog_edit_title));
     builder.setView(dialogLayout);
-    builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+    builder.setNegativeButton(getString(R.string.cancel), new DialogInterface.OnClickListener() {
       @Override
       public void onClick(DialogInterface dialog, int which) {
         UPDATE_ID = null;
@@ -142,7 +142,7 @@ public class RegisterActivityFragment extends Fragment implements LoaderManager.
       return;
     }
     updateRegisteredData(inputName.getText().toString().trim(), inputDescription.getText().toString().trim(), UPDATE_ID.trim());
-    Toast.makeText(getActivity(), "Updated", Toast.LENGTH_SHORT).show();
+    Toast.makeText(getActivity(), getString(R.string.toast_updated), Toast.LENGTH_SHORT).show();
 
     UPDATE_ID = null;
     inputName.getText().clear();

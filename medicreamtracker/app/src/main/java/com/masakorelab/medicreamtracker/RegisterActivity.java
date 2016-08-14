@@ -33,9 +33,9 @@ public class RegisterActivity extends AppCompatActivity {
     final LayoutInflater inflater = (LayoutInflater)this.getSystemService(LAYOUT_INFLATER_SERVICE);
     final View dialogLayout = inflater.inflate(R.layout.dialog_register_create, (ViewGroup) findViewById(R.id.dialog_layout_root));
     final AlertDialog.Builder builder = new AlertDialog.Builder(this);
-    builder.setTitle("Enter Medi Cream Name");
+    builder.setTitle(getString(R.string.register_dialog_add_title));
     builder.setView(dialogLayout);
-    builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+    builder.setNegativeButton(getString(R.string.cancel), new DialogInterface.OnClickListener() {
       @Override
       public void onClick(DialogInterface dialog, int which) {
         inputName.getText().clear();
@@ -77,7 +77,7 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     insertRegisteredData(inputName.getText().toString().trim(), inputDescription.getText().toString().trim());
-    Toast.makeText(this, "Added", Toast.LENGTH_SHORT).show();
+    Toast.makeText(this, getString(R.string.toast_added), Toast.LENGTH_SHORT).show();
 
     inputName.getText().clear();
     inputDescription.getText().clear();

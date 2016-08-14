@@ -8,8 +8,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.masakorelab.medicreamtracker.data.Contract;
-
 public class RecordAdapter extends CursorAdapter {
 
   final Context mContext;
@@ -31,7 +29,7 @@ public class RecordAdapter extends CursorAdapter {
     TextView name = (TextView)view.findViewById(R.id.name_record);
 
     String dateInMillis = cursor.getString(RecordActivityFragment.COL_RECOR_APPLY_DATE);
-    String formattedDate = Utils.timeConverter(Long.parseLong(dateInMillis));
+    String formattedDate = Utils.timeConverter(mContext, Long.parseLong(dateInMillis));
 
     date.setText(formattedDate);
     parts.setText(cursor.getString(RecordActivityFragment.COL_BODY_CATEGORYNAME));

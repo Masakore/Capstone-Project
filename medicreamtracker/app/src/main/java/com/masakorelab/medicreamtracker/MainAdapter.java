@@ -1,6 +1,5 @@
 package com.masakorelab.medicreamtracker;
 
-import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.support.v4.widget.CursorAdapter;

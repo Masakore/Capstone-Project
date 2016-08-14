@@ -5,9 +5,9 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.FrameLayout;
@@ -122,7 +122,7 @@ public class MainActivity extends AppCompatActivity {
     fab1.startAnimation(show_fab_1);
     fab1.setClickable(true);
 
-//    Floating Action Button 2
+    //Floating Action Button 2
     FrameLayout.LayoutParams layoutParams2 = (FrameLayout.LayoutParams) fab2.getLayoutParams();
     layoutParams2.rightMargin += (int) (fab2.getWidth() * 1.5);
     layoutParams2.bottomMargin += (int) (fab2.getHeight() * 1.5);

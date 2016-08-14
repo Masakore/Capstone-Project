@@ -4,8 +4,8 @@ import android.database.Cursor;
 import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
 import android.net.Uri;
-import android.support.v4.app.Fragment;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v4.widget.SimpleCursorAdapter;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -35,6 +35,10 @@ public class MainActivityFragment extends Fragment {
   ImageView img_right_arm;
   ImageView img_left_leg;
   ImageView img_right_leg;
+
+  private final int THREEDAYS = 3;
+  private final int ONEWEEK = 7;
+  private final int THREEWEEKS = 21;
 
   public static final String[] JOINE_RECORD_COLUMNS = {
       Contract.RecordEntry.TABLE_NAME + "." + Contract.RecordEntry._ID,
@@ -126,26 +130,26 @@ public class MainActivityFragment extends Fragment {
     ImageView img_view_bodypart = null;
 
     //Todo refactor here later
-    if (bodyPart.equals("Face")) {
+    if (bodyPart.equals(getString(R.string.main_face))) {
       img_view_bodypart = img_face;
     }
-    if (bodyPart.equals("Body")) {
+    if (bodyPart.equals(getString(R.string.main_body))) {
       img_view_bodypart = img_body;
     }
-    if (bodyPart.equals("LeftArm")) {
+    if (bodyPart.equals(getString(R.string.main_leftarm))) {
       img_view_bodypart = img_left_arm;
     }
-    if (bodyPart.equals("RightArm")) {
+    if (bodyPart.equals(getString(R.string.main_rightarm))) {
       img_view_bodypart = img_right_arm;
     }
-    if (bodyPart.equals("LeftLeg")) {
+    if (bodyPart.equals(getString(R.string.main_leftleg))) {
       img_view_bodypart = img_left_leg;
     }
-    if (bodyPart.equals("RightLeg")) {
+    if (bodyPart.equals(getString(R.string.main_leftleg))) {
       img_view_bodypart = img_right_leg;
     }
 
-    if (bodyPart.isEmpty() || bodyPart == null) {
+    if (img_view_bodypart == null) {
       return;
     }
 
@@ -157,13 +161,13 @@ public class MainActivityFragment extends Fragment {
       if (diff > 0) {
         int howManyDaysPassed = (int) (diff / (1000*60*60*24));
 
-        if (howManyDaysPassed >= 3 && howManyDaysPassed < 7) {
+        if (howManyDaysPassed >= THREEDAYS && howManyDaysPassed < ONEWEEK) {
           GradientDrawable drawable = (GradientDrawable) img_view_bodypart.getBackground().getCurrent();
           drawable.setColor(getActivity().getResources().getColor(R.color.threedays));
-        } else if (howManyDaysPassed >= 7 && howManyDaysPassed < 21) {
+        } else if (howManyDaysPassed >= ONEWEEK && howManyDaysPassed < THREEWEEKS) {
           GradientDrawable drawable = (GradientDrawable) img_view_bodypart.getBackground().getCurrent();
           drawable.setColor(getActivity().getResources().getColor(R.color.oneweek));
-        } else if (howManyDaysPassed >= 21) {
+        } else if (howManyDaysPassed >= THREEWEEKS) {
           GradientDrawable drawable = (GradientDrawable) img_view_bodypart.getBackground().getCurrent();
           drawable.setColor(getActivity().getResources().getColor(R.color.threeweeks));
         }

@@ -74,7 +74,7 @@ public class MediWidgetRemoteViewsService extends RemoteViewsService {
         }
         RemoteViews views = new RemoteViews(getPackageName(), R.layout.widget_medi_list_item);
         long toLongDate = Long.parseLong(data.getString(INDEX_APPLY_DATE));
-        String applyDate = Utils.timeConverter(toLongDate);
+        String applyDate = Utils.timeConverter(getApplicationContext(), toLongDate);
         String bodyParts = data.getString(INDEX_BODY_CATEGORYNAME);
         String creamName = data.getString(INDEX_APPLY_MEDI_NAME);
 
