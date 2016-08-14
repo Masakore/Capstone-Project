@@ -11,6 +11,7 @@
     <string name="validation_empty">This is required field!</string>
     <string name="cancel">Cancel</string>
     <string name="date_format">yyyy-MM-dd</string>
+    <string name="description_global_logo_img">logo image</string>
 
     //Toast
     <string name="toast_created">Created</string>
@@ -27,6 +28,11 @@
     <string name="btn_delete">Delete</string>
     <string name="register_dialog_add_title">Enter Medi Cream Name</string>
     <string name="register_dialog_edit_title">Update Medi Cream Name</string>
+    <string name="description_register_fab">Floating action button to register your cream</string>
+    <string name="description_register_dialog_name">You can enter name here</string>
+    <string name="description_register_dialog_desctiption">You can enter cream description here</string>
+    <string name="description_register_dialog_edit_name">You can change name here</string>
+    <string name="description_register_dialog_edit_desctiption">You can change cream description here</string>
 
     //Record Activity
     <string name="record_placeholder_name">Cream Name</string>
@@ -35,6 +41,14 @@
     <string name="record__date">Click here to select Date</string>
     <string name="record_dialog_title_create">Create Your Records</string>
     <string name="record_btn_create">Create</string>
+    <string name="description_record_fab">Floating action button to create your records</string>
+    <string name="description_record_dialog_date">You can select date here</string>
+    <string name="description_record_dialog_bodypart">You can select body part here</string>
+    <string name="description_record_dialog_name">You can select name here</string>
+    <string name="description_record_dialog_edit_date">You can select date here</string>
+    <string name="description_record_dialog_edit_bodypart">You can select body part here</string>
+    <string name="description_record_dialog_edit_name">You can select name here</string>
+
 
     //Main Activity
     <string name="main_placeholder_name">Select Cream Here to see your records!</string>
@@ -48,6 +62,17 @@
     <string name="main_rightarm">RightArm</string>
     <string name="main_leftleg">LeftLeg</string>
     <string name="main_rightleg">RightLeg</string>
+
+    <string name="description_main_name_spinner">Here you can select your registered cream</string>
+    <string name="description_main_face_img">Face image</string>
+    <string name="description_main_body_img">Body image</string>
+    <string name="description_main_leftarm_img">Left arm image</string>
+    <string name="description_main_rightarm_img">Right arm image</string>
+    <string name="description_main_leftleg_img">Left leg image</string>
+    <string name="description_main_rightleg_img">Right leg image</string>
+    <string name="description_main_fab">Floating action button to open other buttons</string>
+    <string name="description_main_sub_register_fab">Floating action button to register page</string>
+    <string name="description_main_sub_record_fab">Floating action button to record page</string>
 
     //Widget
     <string name="widget_title">Medi Cream List</string>
