@@ -6,6 +6,8 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:nextFocusDown="@+id/record_date"
+    android:nextFocusForward="@+id/record_date"
     android:focusable="true"
     android:focusableInTouchMode="true">
 
@@ -27,8 +29,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/record_placeholder_date"
-            android:nextFocusUp="@id/dialog_layout_root"
-            android:nextFocusLeft="@id/dialog_layout_root"
+            android:nextFocusDown="@+id/record_parts"
+            android:nextFocusForward="@+id/record_parts"
             />
 
     </android.support.design.widget.TextInputLayout>
@@ -38,6 +40,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:contentDescription="@string/description_record_dialog_bodypart"
+        android:nextFocusForward="@+id/record_name"
+        android:nextFocusUp="@+id/record_date"
+        android:nextFocusDown="@+id/record_name"
         app:ms_hint="@string/record_placeholder_parts"
         />
 
@@ -47,6 +52,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:contentDescription="@string/description_record_dialog_name"
+        android:nextFocusForward="@+id/btn_create"
+        android:nextFocusUp="@+id/record_parts"
+        android:nextFocusDown="@+id/btn_create"
         app:ms_hint="@string/record_placeholder_name"
         />
 
@@ -58,6 +66,7 @@
         android:layout_marginTop="40dp"
         android:textColor="@android:color/white"
         android:text="@string/record_btn_create"
+        android:nextFocusUp="@+id/record_name"
         />
 
 </LinearLayout>

@@ -40,6 +40,7 @@
         android:layout_gravity="bottom|end"
         android:layout_margin="@dimen/fab_margin"
         android:contentDescription="@string/description_main_fab"
+        android:nextFocusDown="@+id/item_spinner"
         android:src="@android:drawable/ic_menu_save">
 
     </android.support.design.widget.FloatingActionButton>

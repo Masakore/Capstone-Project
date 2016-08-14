@@ -38,6 +38,10 @@
         android:layout_marginTop="@dimen/activity_vertical_margin"
         android:layout_below="@id/item_explanation_label"
         android:contentDescription="@string/description_main_name_spinner"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:nextFocusDown="@+id/fab"
+        android:nextFocusForward="@+id/fab"
         />
 
     <android.support.v7.widget.GridLayout

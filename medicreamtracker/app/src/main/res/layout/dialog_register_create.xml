@@ -5,6 +5,8 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:nextFocusDown="@+id/register_cream_name"
+    android:nextFocusForward="@+id/register_cream_name"
     android:focusable="true"
     android:focusableInTouchMode="true">
 
@@ -25,7 +27,9 @@
             android:layout_height="wrap_content"
             android:hint="@string/register_placeholder_name"
             android:nextFocusUp="@id/register_cream_name"
-            android:nextFocusLeft="@id/register_cream_name"
+            android:nextFocusLeft="@+id/register_cream_name"
+            android:nextFocusDown="@+id/input_layout_description"
+            android:nextFocusForward="@+id/input_layout_description"
             />
 
     </android.support.design.widget.TextInputLayout>
@@ -42,6 +46,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/register_placeholder_description"
+            android:nextFocusUp="@+id/register_cream_name"
+            android:nextFocusDown="@+id/btn_register"
             />
 
     </android.support.design.widget.TextInputLayout>
@@ -54,7 +60,7 @@
         android:layout_marginTop="40dp"
         android:textColor="@android:color/white"
         android:text="@string/btn_register"
+        android:nextFocusUp="@+id/register_desctiption"
         />
-
 
 </LinearLayout>

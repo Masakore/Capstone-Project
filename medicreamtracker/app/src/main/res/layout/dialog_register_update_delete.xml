@@ -5,6 +5,8 @@
               android:orientation="vertical"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
+              android:nextFocusDown="@+id/register_cream_name_update_delete"
+              android:nextFocusForward="@+id/register_cream_name_update_delete"
               android:focusable="true"
               android:focusableInTouchMode="true">
 
@@ -24,8 +26,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/register_placeholder_name"
-            android:nextFocusUp="@id/register_cream_name"
-            android:nextFocusLeft="@id/register_cream_name"
+            android:nextFocusDown="@+id/register_desctiption_update_delete"
+            android:nextFocusForward="@+id/register_desctiption_update_delete"
             />
 
     </android.support.design.widget.TextInputLayout>
@@ -42,6 +44,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/register_placeholder_description"
+            android:nextFocusUp="@+id/register_cream_name_update_delete"
+            android:nextFocusDown="@+id/btn_register_update"
+            android:nextFocusForward="@+id/btn_register_update"
             />
 
     </android.support.design.widget.TextInputLayout>
@@ -54,6 +59,9 @@
         android:layout_marginTop="40dp"
         android:textColor="@android:color/white"
         android:text="@string/btn_update"
+        android:nextFocusUp="@+id/register_desctiption_update_delete"
+        android:nextFocusDown="@+id/btn_register_delete"
+        android:nextFocusForward="@+id/btn_register_delete"
         />
 
     <Button
@@ -63,5 +71,6 @@
         android:background="@android:color/holo_red_light"
         android:textColor="@android:color/white"
         android:text="@string/btn_delete"
+        android:nextFocusUp="@+id/btn_register_update"
         />
 </LinearLayout>
