@@ -221,11 +221,16 @@ public class MediProvider extends ContentProvider{
       case RECORD: {
         normalizeDate(values);
         long _id = db.insert(Contract.RecordEntry.TABLE_NAME, null, values);
-        if ( _id > 0 )
+        if ( _id > 0 ) {
           returnUri = Contract.RecordEntry.buildRecordUri(_id);
-        else
+
+          //Todo: this is temporaly hack. Please fix this later.
+          getContext().getContentResolver().notifyChange(Contract.RecordEntry.CONTENT_URI_JOINED_TABLE, null);
+        }
+        else {
           //Seems no need to add try & catch with this...
           throw new android.database.SQLException("Failed to insert row into " + uri);
+        }
         break;
       }
       case MEDI_CREAM: {
